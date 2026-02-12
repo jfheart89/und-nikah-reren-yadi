@@ -11,49 +11,75 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
     <!-- ============================================
-         KONFIGURASI UNDANGAN - TEMA GELAP ROMANTIS
+         KONFIGURASI UNDANGAN - FOTO LOKAL
+         
+         CARA PENGGUNAAN:
+         1. Simpan file ini sebagai index.html
+         2. Buat folder dengan struktur:
+            📁 folder-undangan/
+            ├── 📄 index.html
+            ├── 📷 bride.jpg      (foto mempelai wanita)
+            ├── 📷 groom.jpg      (foto mempelai pria)
+            ├── 📷 gallery1.jpg   (foto galeri 1-8)
+            ├── 📷 gallery2.jpg
+            ├── 📷 gallery3.jpg
+            ├── 📷 gallery4.jpg
+            ├── 📷 gallery5.jpg
+            ├── 📷 gallery6.jpg
+            ├── 📷 gallery7.jpg
+            └── 📷 gallery8.jpg
+         3. Upload seluruh folder ke hosting
          ============================================ -->
     <script>
         const CONFIG = {
+            // 🎎 DATA MEMPELAI
             bride: {
                 name: "Reni Pionika",
                 shortName: "Reren",
                 childOrder: "Putri kedua",
                 father: "Alm. Amir Hamzah",
                 mother: "Maiyus Farida",
-                photo: "https://images.unsplash.com/photo-1594552072238-b8a33785b261?w=600&h=600&fit=crop",
+                // ✅ FOTO LOKAL - taruh file bride.jpg di folder yang sama
+                photo: "bride.jpg",
                 instagram: "#"
             },
             groom: {
                 name: "Yadi Hartono",
                 shortName: "Yadi",
-                childOrder: "Putra pertama", // ✅ Diperbarui
+                childOrder: "Putra pertama",
                 father: "Alm. Tarlan Manaf",
                 mother: "Almh. Jumiatie",
-                photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop",
+                // ✅ FOTO LOKAL - taruh file groom.jpg di folder yang sama
+                photo: "groom.jpg",
                 instagram: "#"
             },
+            
+            // 📅 DETAIL ACARA
             event: {
-                date: "12 Februari 2028",
-                dateFull: "Sabtu, 12 Februari 2028",
+                date: "30 Mei 2028",
+                dateFull: "Selasa, 30 Mei 2028",
                 timeAkad: "08:00 - 10:00 WIB",
                 timeResepsi: "11:00 - 14:00 WIB",
-                countDownDate: "February 12, 2028 08:00:00"
+                countDownDate: "May 30, 2028 08:00:00"
             },
+            
+            // 📍 LOKASI
             venue: {
                 akad: {
                     name: "Masjid Raya Sinuruik",
-                    address: "Sinuruik, Kec. Talamau, Kab. Pasaman Barat, Sumatera Barat 26561",
+                    address: "Sinuruik, Kec. Talamau, Kabupaten Pasaman Barat, Sumatera Barat 26561",
                     mapsQuery: "Masjid+Raya+Sinuruik+Pasaman+Barat",
-                    mapsEmbed: "https://www.google.com/maps/embed/v1/search?q=Masjid%2BRaya%2BSinuruik%2BPasaman%2BBarat&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+                    mapsEmbed: "https://www.google.com/maps/embed/v1/search?q=6XR8%2B3PX%20Sinuruik%2C%20Kabupaten%20Pasaman%20Barat%2C%20Sumatera%20Barat&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
                 },
                 resepsi: {
                     name: "Rumah Ibu Maiyus Farida",
                     address: "Kp. Marapak Jorong Benteng Nagari Sinuruik, Kec. Talamau, Kab. Pasaman Barat, Sumatera Barat",
-                    mapsQuery: "6XR8+4GR, Sinuruik, Kec. Talamau, Kabupaten Pasaman Barat, Sumatera Barat",
+                    mapsQuery: "Rumah+Maiyus+Farida+Sinuruik+Pasaman+Barat",
                     mapsEmbed: "https://www.google.com/maps/embed/v1/search?q=6XR8%2B4GR%2C%20Sinuruik%2C%20Kec.%20Talamau%2C%20Kabupaten%20Pasaman%20Barat%2C%20Sumatera%20Barat&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
                 }
             },
+            
+            // 🎁 HADIAH
             gift: {
                 bank: {
                     name: "DANA (E-Wallet)",
@@ -68,30 +94,45 @@
                     landmark: "Dekat Masjid Raya Sinuruik"
                 }
             },
+            
+            // 🖼️ GALERI FOTO LOKAL
+            // ✅ Taruh file gallery1.jpg sampai gallery8.jpg di folder yang sama
             gallery: [
-                "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
-                "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80",
-                "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80",
-                "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&q=80",
-                "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&q=80",
-                "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80",
-                "https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=800&q=80",
-                "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80"
+                "gallery1.jpg",
+                "gallery2.jpg",
+                "gallery3.jpg",
+                "gallery4.jpg",
+                "gallery5.jpg",
+                "gallery6.jpg",
+                "gallery7.jpg",
+                "gallery8.jpg"
             ],
-            // ✅ TEMA GELAP ROMANTIS PENUH WARNA
+            
+            // 🎨 TEMA WARNA
             theme: {
-                bgPrimary: "#0f0c29",      // Ungu tua kebiruan
-                bgSecondary: "#302b63",    // Ungu medium
-                bgAccent: "#24243e",       // Ungu gelap
-                accent1: "#ff006e",        // Pink magenta
-                accent2: "#8338ec",        // Ungu electric
-                accent3: "#3a86ff",        // Biru cerah
-                accent4: "#fb5607",        // Oranye
-                accent5: "#ffbe0b",        // Kuning emas
-                textLight: "#ffffff",
-                textMuted: "#b8b8d1"
+                bgPrimary: "#0f0c29",
+                bgSecondary: "#302b63",
+                bgAccent: "#24243e",
+                accent1: "#ff006e",
+                accent2: "#8338ec",
+                accent3: "#3a86ff",
+                accent4: "#fb5607",
+                accent5: "#ffbe0b"
             }
         };
+
+        // Fungsi untuk cek apakah gambar ada, jika tidak gunakan fallback
+        function getImagePath(path, fallback) {
+            // Cek ekstensi file
+            const ext = path.split('.').pop().toLowerCase();
+            const validExts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+            
+            if (!validExts.includes(ext)) {
+                console.warn(`Format file ${path} mungkin tidak didukung. Gunakan jpg, jpeg, png, webp, atau gif`);
+            }
+            
+            return path;
+        }
 
         function fillContent() {
             document.title = `Undangan Pernikahan ${CONFIG.bride.shortName} & ${CONFIG.groom.shortName}`;
@@ -101,18 +142,33 @@
             document.getElementById('heroGroom').textContent = CONFIG.groom.shortName;
             document.getElementById('heroDate').textContent = CONFIG.event.date;
             
+            // Foto Mempelai dengan error handling
+            const bridePhoto = document.getElementById('bridePhoto');
+            bridePhoto.src = CONFIG.bride.photo;
+            bridePhoto.onerror = function() {
+                this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect fill="%23ff006e" width="400" height="400"/><text fill="white" font-family="serif" font-size="120" x="50%" y="50%" text-anchor="middle" dy=".3em">👰</text></svg>';
+                console.error(`Foto ${CONFIG.bride.photo} tidak ditemukan. Pastikan file ada di folder yang sama.`);
+            };
+            
+            const groomPhoto = document.getElementById('groomPhoto');
+            groomPhoto.src = CONFIG.groom.photo;
+            groomPhoto.onerror = function() {
+                this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect fill="%233a86ff" width="400" height="400"/><text fill="white" font-family="serif" font-size="120" x="50%" y="50%" text-anchor="middle" dy=".3em">🤵</text></svg>';
+                console.error(`Foto ${CONFIG.groom.photo} tidak ditemukan. Pastikan file ada di folder yang sama.`);
+            };
+            
+            // Data mempelai
             document.getElementById('brideName').textContent = CONFIG.bride.name;
             document.getElementById('brideOrder').textContent = CONFIG.bride.childOrder;
             document.getElementById('brideFather').textContent = CONFIG.bride.father;
             document.getElementById('brideMother').textContent = CONFIG.bride.mother;
-            document.getElementById('bridePhoto').src = CONFIG.bride.photo;
             
             document.getElementById('groomName').textContent = CONFIG.groom.name;
             document.getElementById('groomOrder').textContent = CONFIG.groom.childOrder;
             document.getElementById('groomFather').textContent = CONFIG.groom.father;
             document.getElementById('groomMother').textContent = CONFIG.groom.mother;
-            document.getElementById('groomPhoto').src = CONFIG.groom.photo;
             
+            // Event details
             document.getElementById('akadDate').textContent = CONFIG.event.dateFull;
             document.getElementById('akadTime').textContent = CONFIG.event.timeAkad;
             document.getElementById('akadVenue').textContent = CONFIG.venue.akad.name;
@@ -123,11 +179,13 @@
             document.getElementById('resepsiVenue').textContent = CONFIG.venue.resepsi.name;
             document.getElementById('resepsiAddress').textContent = CONFIG.venue.resepsi.address;
             
+            // Map
             document.getElementById('mapTitle').textContent = CONFIG.venue.resepsi.name;
             document.getElementById('mapAddress').textContent = CONFIG.venue.resepsi.address;
             document.getElementById('mapFrame').src = CONFIG.venue.resepsi.mapsEmbed;
             document.getElementById('mapLink').href = `https://maps.google.com/?q=${CONFIG.venue.resepsi.mapsQuery}`;
             
+            // Gift
             document.getElementById('bankNumber').textContent = CONFIG.gift.bank.accountNumber;
             document.getElementById('bankName').textContent = CONFIG.gift.bank.name;
             document.getElementById('bankAccount').textContent = `a.n. ${CONFIG.gift.bank.accountName}`;
@@ -140,13 +198,19 @@
                 <span style="color: ${CONFIG.theme.accent1}">(${CONFIG.gift.address.landmark})</span>
             `;
             
+            // Footer
             document.getElementById('footerNames').textContent = `${CONFIG.bride.shortName} & ${CONFIG.groom.shortName}`;
             document.getElementById('footerDate').textContent = CONFIG.event.date;
+            document.getElementById('footerCouple').textContent = `${CONFIG.bride.shortName} & ${CONFIG.groom.shortName}`;
             
+            // Gallery dengan error handling
             const galleryContainer = document.getElementById('galleryContainer');
             galleryContainer.innerHTML = CONFIG.gallery.map((img, index) => `
-                <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer" onclick="openLightbox(${index})">
-                    <img src="${img}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Gallery ${index + 1}">
+                <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''}" onclick="openLightbox(${index})">
+                    <img src="${img}" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ${index === 0 ? '' : 'aspect-square'}" 
+                         alt="Gallery ${index + 1}"
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect fill=%22%23${['ff006e','8338ec','3a86ff','fb5607'][index%4]}%22 width=%22400%22 height=%22400%22/><text fill=%22white%22 font-family=%22serif%22 font-size=%2280%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>📷 ${index+1}</text></svg>'; this.onerror=null;">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
             `).join('');
@@ -177,7 +241,6 @@
         
         .font-serif { font-family: 'Playfair Display', serif; }
         
-        /* Gradient Text Animations */
         .text-gradient-1 {
             background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
             -webkit-background-clip: text;
@@ -211,7 +274,6 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Floating Animation */
         .float-slow { animation: floatSlow 6s ease-in-out infinite; }
         .float-medium { animation: floatMedium 4s ease-in-out infinite; }
         .float-fast { animation: floatFast 3s ease-in-out infinite; }
@@ -231,7 +293,6 @@
             50% { transform: translateY(-15px) scale(1.05); }
         }
         
-        /* Glass Morphism with Color */
         .glass-color {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
@@ -260,13 +321,10 @@
             box-shadow: 0 8px 32px 0 rgba(58, 134, 255, 0.2);
         }
         
-        /* Neon Glow Effects */
         .neon-pink { box-shadow: 0 0 20px rgba(255, 0, 110, 0.5), 0 0 40px rgba(255, 0, 110, 0.3); }
         .neon-purple { box-shadow: 0 0 20px rgba(131, 56, 236, 0.5), 0 0 40px rgba(131, 56, 236, 0.3); }
         .neon-blue { box-shadow: 0 0 20px rgba(58, 134, 255, 0.5), 0 0 40px rgba(58, 134, 255, 0.3); }
-        .neon-orange { box-shadow: 0 0 20px rgba(251, 86, 7, 0.5), 0 0 40px rgba(251, 86, 7, 0.3); }
         
-        /* Button Styles */
         .btn-gradient {
             background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
             background-size: 200% 200%;
@@ -281,6 +339,7 @@
             position: relative;
             overflow: hidden;
             border: none;
+            cursor: pointer;
         }
         
         .btn-gradient:hover {
@@ -288,22 +347,6 @@
             box-shadow: 0 10px 30px rgba(255, 0, 110, 0.4);
         }
         
-        .btn-pink {
-            background: linear-gradient(45deg, #ff006e, #ff4d9e);
-            color: white;
-            padding: 16px 40px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-        }
-        
-        .btn-pink:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
-        }
-        
-        /* Card Styles */
         .card-glow {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -317,7 +360,6 @@
             border-color: rgba(255, 0, 110, 0.3);
         }
         
-        /* Image Reveal */
         .img-reveal {
             clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
             transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
@@ -325,7 +367,6 @@
         
         .img-reveal.revealed { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
         
-        /* Text Reveal */
         .text-reveal { overflow: hidden; }
         
         .text-reveal span {
@@ -337,7 +378,6 @@
         
         .text-reveal.revealed span { transform: translateY(0); opacity: 1; }
         
-        /* Decorative Blobs */
         .blob {
             position: absolute;
             border-radius: 50%;
@@ -346,41 +386,10 @@
             animation: blobFloat 10s ease-in-out infinite;
         }
         
-        .blob-1 {
-            width: 400px;
-            height: 400px;
-            background: #ff006e;
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-        
-        .blob-2 {
-            width: 300px;
-            height: 300px;
-            background: #8338ec;
-            top: 50%;
-            right: -100px;
-            animation-delay: 2s;
-        }
-        
-        .blob-3 {
-            width: 350px;
-            height: 350px;
-            background: #3a86ff;
-            bottom: -100px;
-            left: 30%;
-            animation-delay: 4s;
-        }
-        
-        .blob-4 {
-            width: 250px;
-            height: 250px;
-            background: #fb5607;
-            top: 20%;
-            left: 60%;
-            animation-delay: 6s;
-        }
+        .blob-1 { width: 400px; height: 400px; background: #ff006e; top: -100px; left: -100px; animation-delay: 0s; }
+        .blob-2 { width: 300px; height: 300px; background: #8338ec; top: 50%; right: -100px; animation-delay: 2s; }
+        .blob-3 { width: 350px; height: 350px; background: #3a86ff; bottom: -100px; left: 30%; animation-delay: 4s; }
+        .blob-4 { width: 250px; height: 250px; background: #fb5607; top: 20%; left: 60%; animation-delay: 6s; }
         
         @keyframes blobFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
@@ -388,7 +397,6 @@
             66% { transform: translate(-20px, 20px) scale(0.9); }
         }
         
-        /* Scroll Progress */
         .scroll-progress {
             position: fixed;
             top: 0;
@@ -399,7 +407,6 @@
             transition: width 0.1s;
         }
         
-        /* Loader */
         .loader {
             position: fixed;
             inset: 0;
@@ -424,7 +431,6 @@
         
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* Particle Canvas */
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -435,7 +441,6 @@
             z-index: 1;
         }
         
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #0f0c29; }
         ::-webkit-scrollbar-thumb {
@@ -443,11 +448,8 @@
             border-radius: 5px;
         }
         
-        /* Gallery Grid */
         .gallery-item { aspect-ratio: 1; }
-        .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
         
-        /* Heart Beat */
         .heart-beat { animation: heartBeat 1.5s ease-in-out infinite; }
         
         @keyframes heartBeat {
@@ -458,7 +460,6 @@
             70% { transform: scale(1); }
         }
         
-        /* Shine Effect */
         .shine {
             position: relative;
             overflow: hidden;
@@ -471,12 +472,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(
-                to right,
-                rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0.3) 50%,
-                rgba(255,255,255,0) 100%
-            );
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
             transform: rotate(30deg);
             animation: shineMove 3s infinite;
         }
@@ -491,6 +487,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in { animation: fadeInUp 0.8s ease forwards; }
+
+        /* Photo placeholder styles */
+        .photo-placeholder {
+            background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
     </style>
 </head>
 <body>
@@ -501,21 +506,16 @@
         <p class="text-sm text-gray-400">Memuat undangan...</p>
     </div>
 
-    <!-- Scroll Progress -->
     <div class="scroll-progress" id="scrollProgress"></div>
-
-    <!-- Particle Canvas -->
     <canvas id="particle-canvas"></canvas>
 
     <!-- Opening Overlay -->
     <div id="opening" class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);">
-        <!-- Animated Blobs -->
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
         <div class="blob blob-4"></div>
 
-        <!-- Floating Hearts -->
         <div class="absolute top-20 left-20 text-pink-500 text-4xl float-slow opacity-60">💕</div>
         <div class="absolute top-40 right-32 text-purple-500 text-3xl float-medium opacity-60">💜</div>
         <div class="absolute bottom-40 left-40 text-blue-500 text-5xl float-fast opacity-60">💙</div>
@@ -561,16 +561,14 @@
         
         <!-- Hero Section -->
         <section class="relative min-h-screen flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);">
-            <!-- Animated Blobs -->
             <div class="blob blob-1"></div>
             <div class="blob blob-2"></div>
             <div class="blob blob-3"></div>
 
             <div class="absolute inset-0 z-0">
-                <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.03\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+                <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.03%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
             </div>
 
-            <!-- Floating Elements -->
             <div class="absolute top-32 left-10 text-pink-500 text-6xl float-slow">✨</div>
             <div class="absolute top-48 right-20 text-purple-500 text-5xl float-medium">💖</div>
             <div class="absolute bottom-40 left-20 text-blue-500 text-4xl float-fast">⭐</div>
@@ -612,14 +610,12 @@
 
         <!-- Countdown Section -->
         <section class="py-32 relative overflow-hidden" style="background: linear-gradient(180deg, #24243e 0%, #0f0c29 100%);">
-            <div class="absolute inset-0">
-                <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#302b63] to-transparent"></div>
-            </div>
+            <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#302b63] to-transparent"></div>
             
             <div class="container mx-auto px-6 relative z-10">
-                <div class="text-center mb-16">
+                <div class="text-center mb-20">
                     <span class="inline-block px-6 py-2 rounded-full glass-purple text-purple-300 text-sm tracking-widest uppercase mb-4">Menuju Hari Bahagia</span>
-                    <h2 class="font-serif text-5xl md:text-7xl text-gradient-1">Countdown</h2>
+                    <h2 class="font-serif text-5xl md:text-6xl text-gradient-1">Countdown</h2>
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
@@ -627,7 +623,7 @@
                         <div class="glass-pink rounded-3xl p-8 card-glow text-center relative overflow-hidden">
                             <div class="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div class="relative z-10">
-                                <div id="days" class="font-serif text-6xl md:text-8xl text-gradient-1 mb-2">00</div>
+                                <div id="days" class="font-serif text-6xl md:text-7xl text-gradient-1 mb-2">00</div>
                                 <div class="text-pink-300 tracking-widest text-xs uppercase">Hari</div>
                             </div>
                         </div>
@@ -636,7 +632,7 @@
                         <div class="glass-purple rounded-3xl p-8 card-glow text-center relative overflow-hidden">
                             <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div class="relative z-10">
-                                <div id="hours" class="font-serif text-6xl md:text-8xl text-gradient-2 mb-2">00</div>
+                                <div id="hours" class="font-serif text-6xl md:text-7xl text-gradient-2 mb-2">00</div>
                                 <div class="text-purple-300 tracking-widest text-xs uppercase">Jam</div>
                             </div>
                         </div>
@@ -645,7 +641,7 @@
                         <div class="glass-blue rounded-3xl p-8 card-glow text-center relative overflow-hidden">
                             <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div class="relative z-10">
-                                <div id="minutes" class="font-serif text-6xl md:text-8xl text-gradient-3 mb-2">00</div>
+                                <div id="minutes" class="font-serif text-6xl md:text-7xl text-gradient-3 mb-2">00</div>
                                 <div class="text-blue-300 tracking-widest text-xs uppercase">Menit</div>
                             </div>
                         </div>
@@ -654,7 +650,7 @@
                         <div class="glass-color rounded-3xl p-8 card-glow text-center relative overflow-hidden border-orange-500/30">
                             <div class="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div class="relative z-10">
-                                <div id="seconds" class="font-serif text-6xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400 mb-2">00</div>
+                                <div id="seconds" class="font-serif text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400 mb-2">00</div>
                                 <div class="text-orange-300 tracking-widest text-xs uppercase">Detik</div>
                             </div>
                         </div>
@@ -665,15 +661,14 @@
 
         <!-- Couple Section -->
         <section class="py-32 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #302b63 100%);">
-            <!-- Decorative Elements -->
             <div class="absolute top-20 right-10 text-pink-500 text-8xl float-slow opacity-30">💕</div>
             <div class="absolute bottom-40 left-10 text-purple-500 text-6xl float-medium opacity-30">💜</div>
 
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-20">
                     <span class="inline-block px-6 py-2 rounded-full glass-pink text-pink-300 text-sm tracking-widest uppercase mb-4">Mempelai</span>
-                    <h2 class="font-serif text-5xl md:text-7xl text-gradient-2">Reren & Yadi</h2>
-                    <div class="w-32 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 mx-auto mt-6 rounded-full"></div>
+                    <h2 class="font-serif text-5xl md:text-6xl text-gradient-2">Reren & Yadi</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 mx-auto mt-6 rounded-full"></div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto items-center">
@@ -684,7 +679,8 @@
                             <div class="relative w-80 h-80 mx-auto">
                                 <div class="absolute inset-0 border-2 border-pink-500/50 rounded-full rotate-6 group-hover:rotate-12 transition-transform duration-700"></div>
                                 <div class="absolute inset-2 border border-purple-500/30 rounded-full -rotate-3 group-hover:-rotate-6 transition-transform duration-700"></div>
-                                <img id="bridePhoto" src="" alt="Reren" class="relative w-full h-full rounded-full object-cover shadow-2xl img-reveal border-4 border-pink-500/30">
+                                <!-- ✅ FOTO LOKAL: bride.jpg -->
+                                <img id="bridePhoto" src="bride.jpg" alt="Reren" class="relative w-full h-full rounded-full object-cover shadow-2xl img-reveal border-4 border-pink-500/30">
                                 <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-2xl shadow-lg neon-pink">
                                     👰
                                 </div>
@@ -708,14 +704,15 @@
                             <div class="relative w-80 h-80 mx-auto">
                                 <div class="absolute inset-0 border-2 border-blue-500/50 rounded-full -rotate-6 group-hover:-rotate-12 transition-transform duration-700"></div>
                                 <div class="absolute inset-2 border border-purple-500/30 rounded-full rotate-3 group-hover:rotate-6 transition-transform duration-700"></div>
-                                <img id="groomPhoto" src="" alt="Yadi" class="relative w-full h-full rounded-full object-cover shadow-2xl img-reveal border-4 border-blue-500/30">
+                                <!-- ✅ FOTO LOKAL: groom.jpg -->
+                                <img id="groomPhoto" src="groom.jpg" alt="Yadi" class="relative w-full h-full rounded-full object-cover shadow-2xl img-reveal border-4 border-blue-500/30">
                                 <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-2xl shadow-lg neon-blue">
                                     🤵
                                 </div>
                             </div>
                         </div>
                         <h3 id="groomName" class="font-serif text-4xl text-white mb-2">Yadi Hartono</h3>
-                        <p id="groomOrder" class="text-blue-400 mb-4 text-lg">Putra pertama</p> <!-- ✅ Diperbarui -->
+                        <p id="groomOrder" class="text-blue-400 mb-4 text-lg">Putra pertama</p>
                         <div class="glass-blue rounded-2xl p-6 inline-block">
                             <p class="text-gray-300 leading-relaxed">
                                 Putra dari<br>
@@ -745,7 +742,7 @@
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-20">
                     <span class="inline-block px-6 py-2 rounded-full glass-purple text-purple-300 text-sm tracking-widest uppercase mb-4">Save The Date</span>
-                    <h2 class="font-serif text-5xl md:text-7xl text-gradient-1">Waktu & Tempat</h2>
+                    <h2 class="font-serif text-5xl md:text-6xl text-gradient-1">Waktu & Tempat</h2>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -843,26 +840,23 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-20">
                     <span class="inline-block px-6 py-2 rounded-full glass-purple text-purple-300 text-sm tracking-widest uppercase mb-4">Galeri</span>
-                    <h2 class="font-serif text-5xl md:text-7xl text-gradient-2">Momen Bahagia</h2>
+                    <h2 class="font-serif text-5xl md:text-6xl text-gradient-2">Momen Bahagia</h2>
                 </div>
 
+                <!-- ✅ GALERI FOTO LOKAL: gallery1.jpg - gallery8.jpg -->
                 <div id="galleryContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto auto-rows-[200px]">
-                    <!-- Gallery items will be inserted here -->
+                    <!-- Filled by JavaScript -->
                 </div>
             </div>
         </section>
 
         <!-- RSVP Section -->
         <section class="py-32 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%);">
-            <div class="absolute inset-0">
-                <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ff006e\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
-            </div>
-
             <div class="container mx-auto px-6 relative z-10">
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-16">
                         <span class="inline-block px-6 py-2 rounded-full glass-pink text-pink-300 text-sm tracking-widest uppercase mb-4">RSVP</span>
-                        <h2 class="font-serif text-5xl md:text-7xl mb-4 text-gradient-1">Konfirmasi Kehadiran</h2>
+                        <h2 class="font-serif text-5xl md:text-6xl mb-4 text-gradient-1">Konfirmasi Kehadiran</h2>
                         <p class="text-gray-400 max-w-xl mx-auto">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu</p>
                     </div>
 
@@ -940,7 +934,7 @@
         <section class="py-32 relative overflow-hidden" style="background: linear-gradient(180deg, #302b63 0%, #0f0c29 100%);">
             <div class="container mx-auto px-6 text-center">
                 <span class="inline-block px-6 py-2 rounded-full glass-purple text-purple-300 text-sm tracking-widest uppercase mb-4">Wedding Gift</span>
-                <h2 class="font-serif text-5xl md:text-7xl text-gradient-2 mb-6">Kirim Hadiah</h2>
+                <h2 class="font-serif text-5xl md:text-6xl text-gradient-2 mb-6">Kirim Hadiah</h2>
                 <p class="text-gray-400 mb-16 max-w-xl mx-auto">Bagi keluarga dan sahabat yang ingin mengirimkan hadiah, dapat melalui:</p>
 
                 <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
@@ -969,7 +963,7 @@
                         <h3 class="font-serif text-2xl mb-2 text-white">Kirim Kado</h3>
                         <div class="space-y-2 mb-6 text-left glass-color rounded-xl p-4">
                             <p id="giftAddress" class="text-gray-300 leading-relaxed text-sm">
-                                <!-- Content filled by JS -->
+                                <!-- Filled by JS -->
                             </p>
                         </div>
                         <button onclick="copyToClipboard('Reni Pionika, Kp. Marapak Jorong Benteng Nagari Sinuruik, Kec. Talamau, Kab. Pasaman Barat, Sumatera Barat 26561')" class="w-full py-3 border-2 border-blue-500 text-blue-400 rounded-xl hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white transition-all font-semibold flex items-center justify-center gap-2">
@@ -983,10 +977,6 @@
 
         <!-- Footer -->
         <footer class="py-20 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
-            <div class="absolute inset-0">
-                <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%238338ec\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
-            </div>
-
             <div class="container mx-auto px-6 relative z-10 text-center">
                 <div class="inline-block p-6 rounded-full glass-pink mb-8">
                     <span class="text-6xl">💕</span>
@@ -995,15 +985,6 @@
                 <h3 id="footerNames" class="font-serif text-6xl md:text-8xl mb-4 text-gradient-1">Reren & Yadi</h3>
                 <p id="footerDate" class="text-pink-400/60 text-xl mb-8">12 Februari 2028</p>
                 
-                <div class="flex justify-center gap-6 mb-12">
-                    <a href="#" class="w-14 h-14 rounded-full glass-pink flex items-center justify-center hover:bg-pink-500 hover:scale-110 transition-all duration-300 text-2xl">
-                        📸
-                    </a>
-                    <a href="#" class="w-14 h-14 rounded-full glass-purple flex items-center justify-center hover:bg-purple-500 hover:scale-110 transition-all duration-300 text-2xl">
-                        💌
-                    </a>
-                </div>
-
                 <div class="w-32 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 mx-auto rounded-full mb-8"></div>
                 
                 <p class="text-gray-500 text-sm">Made with <span class="text-pink-500">❤️</span> by <span id="footerCouple" class="text-pink-400">Reren & Yadi</span></p>
@@ -1014,16 +995,10 @@
 
     <!-- Lightbox -->
     <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 hidden items-center justify-center p-4 backdrop-blur-sm">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-4xl">
-            ✕
-        </button>
-        <button onclick="changeImage(-1)" class="absolute left-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">
-            ‹
-        </button>
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-4xl">✕</button>
+        <button onclick="changeImage(-1)" class="absolute left-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">‹</button>
         <img id="lightboxImg" src="" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl transform scale-95 transition-transform duration-300 border-4 border-pink-500/30" alt="Gallery">
-        <button onclick="changeImage(1)" class="absolute right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">
-            ›
-        </button>
+        <button onclick="changeImage(1)" class="absolute right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">›</button>
     </div>
 
     <!-- Map Modal -->
@@ -1034,17 +1009,13 @@
                     <h3 id="mapTitle" class="font-serif text-2xl text-gradient-1">Lokasi</h3>
                     <p id="mapAddress" class="text-gray-400 text-sm">Alamat</p>
                 </div>
-                <button onclick="closeMap()" class="w-10 h-10 rounded-full glass-pink flex items-center justify-center hover:bg-pink-500 transition-colors text-xl">
-                    ✕
-                </button>
+                <button onclick="closeMap()" class="w-10 h-10 rounded-full glass-pink flex items-center justify-center hover:bg-pink-500 transition-colors text-xl">✕</button>
             </div>
             <div class="h-[500px] bg-[#0f0c29]">
                 <iframe id="mapFrame" src="" width="100%" height="100%" style="border:0; filter: invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy"></iframe>
             </div>
             <div class="p-6 flex gap-4 bg-[#0f0c29]">
-                <a id="mapLink" href="#" target="_blank" class="flex-1 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-center rounded-xl font-semibold hover:shadow-lg hover:shadow-pink-500/50 transition-all">
-                    Buka di Google Maps
-                </a>
+                <a id="mapLink" href="#" target="_blank" class="flex-1 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-center rounded-xl font-semibold hover:shadow-lg hover:shadow-pink-500/50 transition-all">Buka di Google Maps</a>
                 <button onclick="closeMap()" class="px-6 py-3 border-2 border-gray-600 text-gray-400 rounded-xl hover:border-pink-500 hover:text-pink-400 transition-colors">Tutup</button>
             </div>
         </div>
@@ -1057,10 +1028,12 @@
     </div>
 
     <script>
+        // Initialize content
         document.addEventListener('DOMContentLoaded', function() {
             fillContent();
         });
 
+        // Hide loader
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loader').style.opacity = '0';
@@ -1070,11 +1043,10 @@
             }, 1500);
         });
 
-        // Enhanced Particle System with Colors
+        // Particle system
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        
         const colors = ['#ff006e', '#8338ec', '#3a86ff', '#fb5607', '#ffbe0b'];
         
         function resizeCanvas() {
@@ -1133,6 +1105,7 @@
         }
         animateParticles();
 
+        // Open invitation
         function openInvitation() {
             const opening = document.getElementById('opening');
             const mainContent = document.getElementById('main-content');
@@ -1171,6 +1144,7 @@
             }, 600);
         }
 
+        // Countdown
         function updateCountdown() {
             const weddingDate = new Date(CONFIG.event.countDownDate).getTime();
             const now = new Date().getTime();
@@ -1191,6 +1165,7 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
+        // Scroll progress
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -1198,6 +1173,7 @@
             document.getElementById('scrollProgress').style.width = progress + '%';
         });
 
+        // GSAP animations
         function initScrollAnimations() {
             gsap.registerPlugin(ScrollTrigger);
 
@@ -1228,6 +1204,7 @@
             });
         }
 
+        // Gallery
         let currentImageIndex = 0;
 
         function openLightbox(index) {
@@ -1257,6 +1234,7 @@
             document.getElementById('lightboxImg').src = CONFIG.gallery[currentImageIndex];
         }
 
+        // Map
         function openMap(type) {
             const modal = document.getElementById('mapModal');
             const content = document.getElementById('mapContent');
@@ -1289,6 +1267,7 @@
             document.body.style.overflow = 'auto';
         }
 
+        // Copy to clipboard
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 const toast = document.getElementById('toast');
@@ -1301,6 +1280,7 @@
             });
         }
 
+        // RSVP form
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1336,6 +1316,7 @@
             });
         });
 
+        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeLightbox();
