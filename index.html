@@ -5,41 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan - Reren & Yadi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Love+Light:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Pompiere:wght@300;400;500;600&display=swap" rel="stylesheet"> // GANTI FONT
+    <link href="https://fonts.googleapis.com/css2?family=Love+Light:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Pompiere:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
-    <!-- ============================================
-         KONFIGURASI UNDANGAN - FOTO LOKAL
-         
-         CARA PENGGUNAAN:
-         1. Simpan file ini sebagai index.html
-         2. Buat folder dengan struktur:
-            📁 folder-undangan/
-            ├── 📄 index.html
-            ├── 📷 bride.jpg      (foto mempelai wanita)
-            ├── 📷 groom.jpg      (foto mempelai pria)
-            ├── 📷 gallery1.jpg   (foto galeri 1-8)
-            ├── 📷 gallery2.jpg
-            ├── 📷 gallery3.jpg
-            ├── 📷 gallery4.jpg
-            ├── 📷 gallery5.jpg
-            ├── 📷 gallery6.jpg
-            ├── 📷 gallery7.jpg
-            └── 📷 gallery8.jpg
-         3. Upload seluruh folder ke hosting
-         ============================================ -->
     <script>
         const CONFIG = {
-            // 🎎 DATA MEMPELAI
             bride: {
                 name: "Reni Pionika",
                 shortName: "Reren",
                 childOrder: "Putri kedua",
                 father: "Alm. Amir Hamzah",
                 mother: "Maiyus Farida",
-                // ✅ FOTO LOKAL - taruh file bride.jpg di folder yang sama
                 photo: "bride.jpg",
                 instagram: "#"
             },
@@ -49,12 +27,10 @@
                 childOrder: "Putra pertama",
                 father: "Alm. Tarlan Manaf",
                 mother: "Almh. Jumiatie",
-                // ✅ FOTO LOKAL - taruh file groom.jpg di folder yang sama
                 photo: "groom.jpg",
                 instagram: "#"
             },
             
-            // 📅 DETAIL ACARA
             event: {
                 date: "30 Mei 2028",
                 dateFull: "Selasa, 30 Mei 2028",
@@ -63,7 +39,6 @@
                 countDownDate: "May 30, 2028 08:00:00"
             },
             
-            // 📍 LOKASI
             venue: {
                 akad: {
                     name: "Masjid Raya Sinuruik",
@@ -79,7 +54,6 @@
                 }
             },
             
-            // 🎁 HADIAH
             gift: {
                 bank: {
                     name: "DANA (E-Wallet)",
@@ -95,8 +69,6 @@
                 }
             },
             
-            // 🖼️ GALERI FOTO LOKAL
-            // ✅ Taruh file gallery1.jpg sampai gallery8.jpg di folder yang sama
             gallery: [
                 "gallery1.jpg",
                 "gallery2.jpg",
@@ -108,7 +80,13 @@
                 "gallery8.jpg"
             ],
             
-            // 🎨 TEMA WARNA
+            // ðŸŽµ KONFIGURASI MUSIK - Ganti dengan file MP3 Anda
+            music: {
+                file: "musik.mp3", // Ganti dengan nama file MP3 Anda
+                autoplay: true,
+                volume: 0.5 // Volume 0.0 - 1.0 (50%)
+            },
+            
             theme: {
                 bgPrimary: "#0f0c29",
                 bgSecondary: "#302b63",
@@ -121,9 +99,7 @@
             }
         };
 
-        // Fungsi untuk cek apakah gambar ada, jika tidak gunakan fallback
         function getImagePath(path, fallback) {
-            // Cek ekstensi file
             const ext = path.split('.').pop().toLowerCase();
             const validExts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
             
@@ -142,22 +118,20 @@
             document.getElementById('heroGroom').textContent = CONFIG.groom.shortName;
             document.getElementById('heroDate').textContent = CONFIG.event.date;
             
-            // Foto Mempelai dengan error handling
             const bridePhoto = document.getElementById('bridePhoto');
             bridePhoto.src = CONFIG.bride.photo;
             bridePhoto.onerror = function() {
-                this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect fill="%23ff006e" width="400" height="400"/><text fill="white" font-family="serif" font-size="120" x="50%" y="50%" text-anchor="middle" dy=".3em">👰</text></svg>';
+                this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect fill="%23ff006e" width="400" height="400"/><text fill="white" font-family="serif" font-size="120" x="50%" y="50%" text-anchor="middle" dy=".3em">ðŸ‘°</text></svg>';
                 console.error(`Foto ${CONFIG.bride.photo} tidak ditemukan. Pastikan file ada di folder yang sama.`);
             };
             
             const groomPhoto = document.getElementById('groomPhoto');
             groomPhoto.src = CONFIG.groom.photo;
             groomPhoto.onerror = function() {
-                this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect fill="%233a86ff" width="400" height="400"/><text fill="white" font-family="serif" font-size="120" x="50%" y="50%" text-anchor="middle" dy=".3em">🤵</text></svg>';
+                this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect fill="%233a86ff" width="400" height="400"/><text fill="white" font-family="serif" font-size="120" x="50%" y="50%" text-anchor="middle" dy=".3em">ðŸ¤µ</text></svg>';
                 console.error(`Foto ${CONFIG.groom.photo} tidak ditemukan. Pastikan file ada di folder yang sama.`);
             };
             
-            // Data mempelai
             document.getElementById('brideName').textContent = CONFIG.bride.name;
             document.getElementById('brideOrder').textContent = CONFIG.bride.childOrder;
             document.getElementById('brideFather').textContent = CONFIG.bride.father;
@@ -168,7 +142,6 @@
             document.getElementById('groomFather').textContent = CONFIG.groom.father;
             document.getElementById('groomMother').textContent = CONFIG.groom.mother;
             
-            // Event details
             document.getElementById('akadDate').textContent = CONFIG.event.dateFull;
             document.getElementById('akadTime').textContent = CONFIG.event.timeAkad;
             document.getElementById('akadVenue').textContent = CONFIG.venue.akad.name;
@@ -179,13 +152,11 @@
             document.getElementById('resepsiVenue').textContent = CONFIG.venue.resepsi.name;
             document.getElementById('resepsiAddress').textContent = CONFIG.venue.resepsi.address;
             
-            // Map
             document.getElementById('mapTitle').textContent = CONFIG.venue.resepsi.name;
             document.getElementById('mapAddress').textContent = CONFIG.venue.resepsi.address;
             document.getElementById('mapFrame').src = CONFIG.venue.resepsi.mapsEmbed;
             document.getElementById('mapLink').href = `https://maps.google.com/?q=${CONFIG.venue.resepsi.mapsQuery}`;
             
-            // Gift
             document.getElementById('bankNumber').textContent = CONFIG.gift.bank.accountNumber;
             document.getElementById('bankName').textContent = CONFIG.gift.bank.name;
             document.getElementById('bankAccount').textContent = `a.n. ${CONFIG.gift.bank.accountName}`;
@@ -198,19 +169,17 @@
                 <span style="color: ${CONFIG.theme.accent1}">(${CONFIG.gift.address.landmark})</span>
             `;
             
-            // Footer
             document.getElementById('footerNames').textContent = `${CONFIG.bride.shortName} & ${CONFIG.groom.shortName}`;
             document.getElementById('footerDate').textContent = CONFIG.event.date;
             document.getElementById('footerCouple').textContent = `${CONFIG.bride.shortName} & ${CONFIG.groom.shortName}`;
             
-            // Gallery dengan error handling
             const galleryContainer = document.getElementById('galleryContainer');
             galleryContainer.innerHTML = CONFIG.gallery.map((img, index) => `
                 <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''}" onclick="openLightbox(${index})">
                     <img src="${img}" 
                          class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ${index === 0 ? '' : 'aspect-square'}" 
                          alt="Gallery ${index + 1}"
-                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect fill=%22%23${['ff006e','8338ec','3a86ff','fb5607'][index%4]}%22 width=%22400%22 height=%22400%22/><text fill=%22white%22 font-family=%22serif%22 font-size=%2280%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>📷 ${index+1}</text></svg>'; this.onerror=null;">
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect fill=%22%23${['ff006e','8338ec','3a86ff','fb5607'][index%4]}%22 width=%22400%22 height=%22400%22/><text fill=%22white%22 font-family=%22serif%22 font-size=%2280%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>ðŸ“· ${index+1}</text></svg>'; this.onerror=null;">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
             `).join('');
@@ -232,14 +201,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Pompiere', sans-serif; // GANTI FONT
+            font-family: 'Pompiere', sans-serif;
             background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             color: #ffffff;
             overflow-x: hidden;
             min-height: 100vh;
         }
         
-        .font-serif { font-family: 'Love Light', serif; } // GANTI FONT
+        .font-serif { font-family: 'Love Light', serif; }
         
         .text-gradient-1 {
             background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
@@ -488,7 +457,81 @@
         }
         .animate-fade-in { animation: fadeInUp 0.8s ease forwards; }
 
-        /* Photo placeholder styles */
+        /* Music Control Button */
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 0, 110, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 0, 110, 0.5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 0, 110, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 0, 110, 0.5);
+        }
+
+        .music-control.playing {
+            animation: musicPulse 2s infinite;
+            background: rgba(76, 175, 80, 0.3);
+            border-color: rgba(76, 175, 80, 0.6);
+        }
+
+        @keyframes musicPulse {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(76, 175, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+
+        .music-icon {
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+
+        /* Music Overlay untuk interaksi pertama */
+        .music-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 12, 41, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 9998;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+        }
+
+        .music-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .music-start-content {
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
         .photo-placeholder {
             background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
             display: flex;
@@ -499,6 +542,27 @@
     </style>
 </head>
 <body>
+    <!-- ðŸŽµ ELEMEN AUDIO (HIDDEN) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="musik.mp3" type="audio/mpeg">
+        <source src="musik.ogg" type="audio/ogg">
+        Browser Anda tidak mendukung pemutar audio.
+    </audio>
+
+    <!-- ðŸŽµ MUSIC OVERLAY - Klik untuk mulai -->
+    <div id="musicOverlay" class="music-overlay" onclick="startMusicAndOpen()">
+        <div class="music-start-content">
+            <div class="text-6xl mb-4">ðŸŽµ</div>
+            <h2 class="font-serif text-4xl text-gradient-1 mb-2">Klik untuk Memulai</h2>
+            <p class="text-gray-400">Sentuh layar untuk membuka undangan dengan musik</p>
+        </div>
+    </div>
+
+    <!-- ðŸŽµ TOMBOL KONTROL MUSIK -->
+    <div class="music-control" id="musicToggle" onclick="toggleMusic()" style="display: none;">
+        <span class="music-icon" id="musicIcon">ðŸ”‡</span>
+    </div>
+
     <!-- Loading Screen -->
     <div class="loader" id="loader">
         <div class="loader-ring mb-6"></div>
@@ -516,15 +580,15 @@
         <div class="blob blob-3"></div>
         <div class="blob blob-4"></div>
 
-        <div class="absolute top-20 left-20 text-pink-500 text-4xl float-slow opacity-60">💕</div>
-        <div class="absolute top-40 right-32 text-purple-500 text-3xl float-medium opacity-60">💜</div>
-        <div class="absolute bottom-40 left-40 text-blue-500 text-5xl float-fast opacity-60">💙</div>
-        <div class="absolute bottom-20 right-20 text-orange-500 text-4xl float-slow opacity-60">🧡</div>
+        <div class="absolute top-20 left-20 text-pink-500 text-4xl float-slow opacity-60">ðŸ’•</div>
+        <div class="absolute top-40 right-32 text-purple-500 text-3xl float-medium opacity-60">ðŸ’œ</div>
+        <div class="absolute bottom-40 left-40 text-blue-500 text-5xl float-fast opacity-60">ðŸ’™</div>
+        <div class="absolute bottom-20 right-20 text-orange-500 text-4xl float-slow opacity-60">ðŸ§¡</div>
 
         <div class="relative z-10 text-center text-white px-6 max-w-3xl">
             <div class="mb-8">
                 <div class="inline-block p-4 rounded-full glass-pink mb-6 animate-fade-in">
-                    <span class="text-4xl">💍</span>
+                    <span class="text-4xl">ðŸ’</span>
                 </div>
                 <p class="text-pink-400 tracking-[0.5em] text-sm mb-4 uppercase animate-fade-in" style="animation-delay: 0.3s;">Undangan Pernikahan</p>
                 
@@ -547,9 +611,10 @@
 
             <br>
 
-            <button onclick="openInvitation()" class="btn-gradient shine animate-fade-in" style="animation-delay: 1.3s;">
+            <!-- Tombol asli disembunyikan, diganti dengan overlay -->
+            <button id="openInviteBtn" onclick="openInvitation()" class="btn-gradient shine animate-fade-in hidden" style="animation-delay: 1.3s;">
                 <span class="flex items-center gap-3">
-                    <span class="text-2xl">💌</span>
+                    <span class="text-2xl">ðŸ’Œ</span>
                     Buka Undangan
                 </span>
             </button>
@@ -569,10 +634,10 @@
                 <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.03%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
             </div>
 
-            <div class="absolute top-32 left-10 text-pink-500 text-6xl float-slow">✨</div>
-            <div class="absolute top-48 right-20 text-purple-500 text-5xl float-medium">💖</div>
-            <div class="absolute bottom-40 left-20 text-blue-500 text-4xl float-fast">⭐</div>
-            <div class="absolute bottom-32 right-32 text-orange-500 text-5xl float-slow">🌟</div>
+            <div class="absolute top-32 left-10 text-pink-500 text-6xl float-slow">âœ¨</div>
+            <div class="absolute top-48 right-20 text-purple-500 text-5xl float-medium">ðŸ’–</div>
+            <div class="absolute bottom-40 left-20 text-blue-500 text-4xl float-fast">â­</div>
+            <div class="absolute bottom-32 right-32 text-orange-500 text-5xl float-slow">ðŸŒŸ</div>
 
             <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto">
                 <div class="mb-6">
@@ -593,7 +658,7 @@
                     <p class="text-3xl md:text-4xl font-serif text-white mb-4" id="heroDate">12 Februari 2028</p>
                     <div class="flex items-center justify-center gap-4 text-gray-400 mb-4">
                         <div class="h-px w-16 bg-gradient-to-r from-transparent to-pink-500"></div>
-                        <span class="text-pink-400">♥</span>
+                        <span class="text-pink-400">â™¥</span>
                         <div class="h-px w-16 bg-gradient-to-l from-transparent to-purple-500"></div>
                     </div>
                     <p class="tracking-[0.3em] text-sm text-gray-400 uppercase">Akad & Resepsi</p>
@@ -661,8 +726,8 @@
 
         <!-- Couple Section -->
         <section class="py-32 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #302b63 100%);">
-            <div class="absolute top-20 right-10 text-pink-500 text-8xl float-slow opacity-30">💕</div>
-            <div class="absolute bottom-40 left-10 text-purple-500 text-6xl float-medium opacity-30">💜</div>
+            <div class="absolute top-20 right-10 text-pink-500 text-8xl float-slow opacity-30">ðŸ’•</div>
+            <div class="absolute bottom-40 left-10 text-purple-500 text-6xl float-medium opacity-30">ðŸ’œ</div>
 
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-20">
@@ -679,10 +744,9 @@
                             <div class="relative w-80 h-80 mx-auto">
                                 <div class="absolute inset-0 border-2 border-pink-500/50 rounded-full rotate-6 group-hover:rotate-12 transition-transform duration-700"></div>
                                 <div class="absolute inset-2 border border-purple-500/30 rounded-full -rotate-3 group-hover:-rotate-6 transition-transform duration-700"></div>
-                                <!-- ✅ FOTO LOKAL: bride.jpg -->
                                 <img id="bridePhoto" src="bride.jpg" alt="Reren" class="relative w-full h-full rounded-full object-cover shadow-2xl img-reveal border-4 border-pink-500/30">
                                 <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-2xl shadow-lg neon-pink">
-                                    👰
+                                    ðŸ‘°
                                 </div>
                             </div>
                         </div>
@@ -704,10 +768,9 @@
                             <div class="relative w-80 h-80 mx-auto">
                                 <div class="absolute inset-0 border-2 border-blue-500/50 rounded-full -rotate-6 group-hover:-rotate-12 transition-transform duration-700"></div>
                                 <div class="absolute inset-2 border border-purple-500/30 rounded-full rotate-3 group-hover:rotate-6 transition-transform duration-700"></div>
-                                <!-- ✅ FOTO LOKAL: groom.jpg -->
                                 <img id="groomPhoto" src="groom.jpg" alt="Yadi" class="relative w-full h-full rounded-full object-cover shadow-2xl img-reveal border-4 border-blue-500/30">
                                 <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-2xl shadow-lg neon-blue">
-                                    🤵
+                                    ðŸ¤µ
                                 </div>
                             </div>
                         </div>
@@ -753,7 +816,7 @@
                             
                             <div class="relative z-10">
                                 <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mb-8 text-white shadow-lg neon-pink group-hover:scale-110 transition-transform duration-500">
-                                    <span class="text-4xl">🕌</span>
+                                    <span class="text-4xl">ðŸ•Œ</span>
                                 </div>
                                 
                                 <h3 class="font-serif text-3xl mb-2 text-gradient-1">Akad Nikah</h3>
@@ -762,7 +825,7 @@
                                 <div class="space-y-6">
                                     <div class="flex items-start gap-4">
                                         <div class="w-12 h-12 rounded-xl glass-pink flex items-center justify-center flex-shrink-0">
-                                            <span class="text-2xl">📅</span>
+                                            <span class="text-2xl">ðŸ“…</span>
                                         </div>
                                         <div>
                                             <p id="akadDate" class="text-pink-300 font-semibold text-lg">Sabtu, 12 Februari 2028</p>
@@ -772,7 +835,7 @@
                                     
                                     <div class="flex items-start gap-4">
                                         <div class="w-12 h-12 rounded-xl glass-pink flex items-center justify-center flex-shrink-0">
-                                            <span class="text-2xl">📍</span>
+                                            <span class="text-2xl">ðŸ“</span>
                                         </div>
                                         <div>
                                             <p id="akadVenue" class="text-pink-300 font-semibold text-lg">Masjid Raya Sinuruik</p>
@@ -782,7 +845,7 @@
                                 </div>
 
                                 <button onclick="openMap('akad')" class="mt-8 w-full py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-pink-500/50 transition-all flex items-center justify-center gap-2 group/btn">
-                                    <span class="text-xl">🗺️</span>
+                                    <span class="text-xl">ðŸ—ºï¸</span>
                                     Lihat Lokasi Akad
                                 </button>
                             </div>
@@ -796,7 +859,7 @@
                             
                             <div class="relative z-10">
                                 <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-8 text-white shadow-lg neon-blue group-hover:scale-110 transition-transform duration-500">
-                                    <span class="text-4xl">🎉</span>
+                                    <span class="text-4xl">ðŸŽ‰</span>
                                 </div>
                                 
                                 <h3 class="font-serif text-3xl mb-2 text-gradient-3">Resepsi</h3>
@@ -805,7 +868,7 @@
                                 <div class="space-y-6">
                                     <div class="flex items-start gap-4">
                                         <div class="w-12 h-12 rounded-xl glass-blue flex items-center justify-center flex-shrink-0">
-                                            <span class="text-2xl">📅</span>
+                                            <span class="text-2xl">ðŸ“…</span>
                                         </div>
                                         <div>
                                             <p id="resepsiDate" class="text-blue-300 font-semibold text-lg">Sabtu, 12 Februari 2028</p>
@@ -815,7 +878,7 @@
                                     
                                     <div class="flex items-start gap-4">
                                         <div class="w-12 h-12 rounded-xl glass-blue flex items-center justify-center flex-shrink-0">
-                                            <span class="text-2xl">📍</span>
+                                            <span class="text-2xl">ðŸ“</span>
                                         </div>
                                         <div>
                                             <p id="resepsiVenue" class="text-blue-300 font-semibold text-lg">Rumah Ibu Maiyus Farida</p>
@@ -825,7 +888,7 @@
                                 </div>
 
                                 <button onclick="openMap('resepsi')" class="mt-8 w-full py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all flex items-center justify-center gap-2 group/btn">
-                                    <span class="text-xl">🗺️</span>
+                                    <span class="text-xl">ðŸ—ºï¸</span>
                                     Lihat Lokasi Resepsi
                                 </button>
                             </div>
@@ -843,7 +906,6 @@
                     <h2 class="font-serif text-5xl md:text-6xl text-gradient-2">Momen Bahagia</h2>
                 </div>
 
-                <!-- ✅ GALERI FOTO LOKAL: gallery1.jpg - gallery8.jpg -->
                 <div id="galleryContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto auto-rows-[200px]">
                     <!-- Filled by JavaScript -->
                 </div>
@@ -874,14 +936,14 @@
                                         <label class="cursor-pointer group">
                                             <input type="radio" name="attendance" value="hadir" class="hidden peer" checked>
                                             <div class="px-6 py-4 bg-white/5 border border-pink-500/30 rounded-xl text-center peer-checked:bg-gradient-to-r peer-checked:from-pink-500 peer-checked:to-rose-500 peer-checked:border-pink-500 transition-all group-hover:border-pink-400">
-                                                <div class="text-2xl mb-1">🎉</div>
+                                                <div class="text-2xl mb-1">ðŸŽ‰</div>
                                                 <div class="text-sm font-semibold text-gray-300 peer-checked:text-white">Hadir</div>
                                             </div>
                                         </label>
                                         <label class="cursor-pointer group">
                                             <input type="radio" name="attendance" value="tidak" class="hidden peer">
                                             <div class="px-6 py-4 bg-white/5 border border-gray-500/30 rounded-xl text-center peer-checked:bg-gradient-to-r peer-checked:from-gray-600 peer-checked:to-gray-700 peer-checked:border-gray-500 transition-all group-hover:border-gray-400">
-                                                <div class="text-2xl mb-1">😢</div>
+                                                <div class="text-2xl mb-1">ðŸ˜¢</div>
                                                 <div class="text-sm font-semibold text-gray-300 peer-checked:text-white">Berhalangan</div>
                                             </div>
                                         </label>
@@ -904,7 +966,7 @@
                                 </div>
 
                                 <button type="submit" class="w-full py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-pink-500/50 transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2">
-                                    <span class="text-xl">💌</span>
+                                    <span class="text-xl">ðŸ’Œ</span>
                                     Kirim Konfirmasi
                                 </button>
                             </form>
@@ -922,7 +984,7 @@
                                     </div>
                                     <span class="px-3 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">Hadir</span>
                                 </div>
-                                <p class="text-gray-300 leading-relaxed">Selamat menempuh hidup baru Reren & Yadi! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. 🎉✨</p>
+                                <p class="text-gray-300 leading-relaxed">Selamat menempuh hidup baru Reren & Yadi! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. ðŸŽ‰âœ¨</p>
                             </div>
                         </div>
                     </div>
@@ -950,7 +1012,7 @@
                             <p id="bankAccount" class="text-sm text-pink-400">a.n. Reni Pionika</p>
                         </div>
                         <button onclick="copyToClipboard('085763410286')" class="w-full py-3 border-2 border-pink-500 text-pink-400 rounded-xl hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white transition-all font-semibold flex items-center justify-center gap-2">
-                            <span class="text-xl">📋</span>
+                            <span class="text-xl">ðŸ“‹</span>
                             Salin Nomor DANA
                         </button>
                     </div>
@@ -958,7 +1020,7 @@
                     <!-- Alamat -->
                     <div class="glass-blue rounded-3xl p-8 border border-blue-500/20 card-glow">
                         <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg neon-blue">
-                            📦
+                            ðŸ“¦
                         </div>
                         <h3 class="font-serif text-2xl mb-2 text-white">Kirim Kado</h3>
                         <div class="space-y-2 mb-6 text-left glass-color rounded-xl p-4">
@@ -967,7 +1029,7 @@
                             </p>
                         </div>
                         <button onclick="copyToClipboard('Reni Pionika, Kp. Marapak Jorong Benteng Nagari Sinuruik, Kec. Talamau, Kab. Pasaman Barat, Sumatera Barat 26561')" class="w-full py-3 border-2 border-blue-500 text-blue-400 rounded-xl hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white transition-all font-semibold flex items-center justify-center gap-2">
-                            <span class="text-xl">📋</span>
+                            <span class="text-xl">ðŸ“‹</span>
                             Salin Alamat
                         </button>
                     </div>
@@ -979,7 +1041,7 @@
         <footer class="py-20 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10 text-center">
                 <div class="inline-block p-6 rounded-full glass-pink mb-8">
-                    <span class="text-6xl">💕</span>
+                    <span class="text-6xl">ðŸ’•</span>
                 </div>
                 
                 <h3 id="footerNames" class="font-serif text-6xl md:text-8xl mb-4 text-gradient-1">Reren & Yadi</h3>
@@ -987,18 +1049,18 @@
                 
                 <div class="w-32 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 mx-auto rounded-full mb-8"></div>
                 
-                <p class="text-gray-500 text-sm">Made with <span class="text-pink-500">❤️</span> by <span id="footerCouple" class="text-pink-400">Reren & Yadi</span></p>
-                <p class="text-gray-700 text-xs mt-2">© 2028 All Rights Reserved</p>
+                <p class="text-gray-500 text-sm">Made with <span class="text-pink-500">â¤ï¸</span> by <span id="footerCouple" class="text-pink-400">Reren & Yadi</span></p>
+                <p class="text-gray-700 text-xs mt-2">Â© 2028 All Rights Reserved</p>
             </div>
         </footer>
     </main>
 
     <!-- Lightbox -->
     <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 hidden items-center justify-center p-4 backdrop-blur-sm">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-4xl">✕</button>
-        <button onclick="changeImage(-1)" class="absolute left-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">‹</button>
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-4xl">âœ•</button>
+        <button onclick="changeImage(-1)" class="absolute left-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">â€¹</button>
         <img id="lightboxImg" src="" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl transform scale-95 transition-transform duration-300 border-4 border-pink-500/30" alt="Gallery">
-        <button onclick="changeImage(1)" class="absolute right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">›</button>
+        <button onclick="changeImage(1)" class="absolute right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">â€º</button>
     </div>
 
     <!-- Map Modal -->
@@ -1009,7 +1071,7 @@
                     <h3 id="mapTitle" class="font-serif text-2xl text-gradient-1">Lokasi</h3>
                     <p id="mapAddress" class="text-gray-400 text-sm">Alamat</p>
                 </div>
-                <button onclick="closeMap()" class="w-10 h-10 rounded-full glass-pink flex items-center justify-center hover:bg-pink-500 transition-colors text-xl">✕</button>
+                <button onclick="closeMap()" class="w-10 h-10 rounded-full glass-pink flex items-center justify-center hover:bg-pink-500 transition-colors text-xl">âœ•</button>
             </div>
             <div class="h-[500px] bg-[#0f0c29]">
                 <iframe id="mapFrame" src="" width="100%" height="100%" style="border:0; filter: invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy"></iframe>
@@ -1023,11 +1085,19 @@
 
     <!-- Toast -->
     <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 glass-pink text-white px-8 py-4 rounded-full shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-3 border-pink-500/50">
-        <span class="text-2xl">✅</span>
+        <span class="text-2xl">âœ…</span>
         <span class="font-medium">Berhasil disalin!</span>
     </div>
 
     <script>
+        // ðŸŽµ VARIABEL MUSIK
+        let audio = document.getElementById('bgMusic');
+        let isPlaying = false;
+        let hasStarted = false;
+        
+        // Set volume dari konfigurasi
+        audio.volume = CONFIG.music.volume;
+
         // Initialize content
         document.addEventListener('DOMContentLoaded', function() {
             fillContent();
@@ -1042,6 +1112,56 @@
                 }, 500);
             }, 1500);
         });
+
+        // ðŸŽµ FUNGSI MUSIK - Solusi 1: Overlay + Autoclick
+        function startMusicAndOpen() {
+            if (hasStarted) return;
+            hasStarted = true;
+
+            // Sembunyikan overlay musik
+            const overlay = document.getElementById('musicOverlay');
+            overlay.classList.add('hidden');
+
+            // Tampilkan tombol kontrol musik
+            document.getElementById('musicToggle').style.display = 'flex';
+
+            // Mainkan musik
+            playMusic();
+
+            // Auto-click tombol buka undangan setelah delay
+            setTimeout(() => {
+                openInvitation();
+            }, 500);
+        }
+
+        function playMusic() {
+            audio.play().then(() => {
+                isPlaying = true;
+                document.getElementById('musicIcon').textContent = 'ðŸ”Š';
+                document.getElementById('musicToggle').classList.add('playing');
+                console.log('ðŸŽµ Musik mulai diputar');
+            }).catch(error => {
+                console.error('Gagal memutar musik:', error);
+                // Jika gagal, coba lagi saat ada interaksi
+                document.addEventListener('click', function retry() {
+                    audio.play();
+                    document.removeEventListener('click', retry);
+                }, { once: true });
+            });
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                document.getElementById('musicIcon').textContent = 'ðŸ”‡';
+                document.getElementById('musicToggle').classList.remove('playing');
+            } else {
+                audio.play();
+                document.getElementById('musicIcon').textContent = 'ðŸ”Š';
+                document.getElementById('musicToggle').classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        }
 
         // Particle system
         const canvas = document.getElementById('particle-canvas');
