@@ -174,12 +174,25 @@
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Pompiere', sans-serif; 
             background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);
             color: #ffffff;
             overflow-x: hidden;
             min-height: 100vh;
+            /* Scroll Snap untuk Desktop */
+            scroll-snap-type: y mandatory;
+        }
+        
+        /* Mobile: Scroll snap dengan proximity untuk pengalaman lebih natural */
+        @media (max-width: 768px) {
+            body {
+                scroll-snap-type: y proximity;
+            }
         }
         
         .font-couple {
@@ -489,6 +502,102 @@
                 font-size: 4.5rem;
             }
         }
+
+        /* ============================================
+           SCROLL SNAP IMPLEMENTATION
+           ============================================ */
+        
+        /* Snap Container - Main Content */
+        .snap-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        /* Mobile: Gunakan proximity untuk pengalaman scroll lebih natural */
+        @media (max-width: 768px) {
+            .snap-container {
+                scroll-snap-type: y proximity;
+                /* Fallback untuk browser lama */
+                -webkit-scroll-snap-type: y proximity;
+            }
+        }
+
+        /* Desktop: Mandatory untuk snap yang pasti */
+        @media (min-width: 769px) {
+            .snap-container {
+                scroll-snap-type: y mandatory;
+                -webkit-scroll-snap-type: y mandatory;
+            }
+        }
+
+        /* Setiap Section adalah Snap Point */
+        .snap-section {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Section khusus yang kontennya panjang (RSVP, Gallery) */
+        .snap-section-auto {
+            scroll-snap-align: start;
+            scroll-snap-stop: normal;
+            min-height: 100vh;
+            height: auto;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+
+        /* Mobile adjustments untuk snap */
+        @media (max-width: 768px) {
+            .snap-section {
+                min-height: 100vh;
+                min-height: 100dvh; /* Dynamic viewport height untuk mobile */
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+            }
+            
+            .snap-section-auto {
+                min-height: auto;
+                scroll-snap-align: none; /* Nonaktifkan snap untuk section panjang di mobile */
+            }
+        }
+
+        /* Tablet */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .snap-section {
+                min-height: 100vh;
+                scroll-snap-align: start;
+            }
+        }
+
+        /* Touch action untuk performa scroll better di mobile */
+        .snap-section,
+        .snap-section-auto {
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Reduced motion untuk accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .snap-container {
+                scroll-snap-type: none;
+            }
+            .snap-section,
+            .snap-section-auto {
+                scroll-snap-align: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -556,11 +665,11 @@
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main id="main-content" class="hidden relative">
+    <!-- Main Content dengan Scroll Snap -->
+    <main id="main-content" class="hidden snap-container">
         
         <!-- Hero Section -->
-        <section class="relative min-h-screen flex items-center justify-center overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+        <section class="snap-section relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="blob blob-1"></div>
             <div class="blob blob-2"></div>
             <div class="blob blob-3"></div>
@@ -599,7 +708,7 @@
                     <p class="tracking-[0.3em] text-sm text-white uppercase">Akad & Resepsi</p>
                 </div>
 
-                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-70">
+                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-70 animate-bounce">
                     <span class="text-xs tracking-widest text-white">SCROLL</span>
                     <div class="w-6 h-10 border-2 border-pink-500 rounded-full flex justify-center pt-2">
                         <div class="w-1 h-2 bg-pink-500 rounded-full animate-bounce"></div>
@@ -611,7 +720,7 @@
         <div class="section-divider"></div>
 
         <!-- Countdown Section -->
-        <section class="py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+        <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-16">
                     <span class="section-badge">Menuju Hari Bahagia</span>
@@ -642,7 +751,7 @@
         <div class="section-divider"></div>
 
         <!-- Couple Section -->
-        <section class="py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+        <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="absolute top-20 right-10 text-pink-500 text-8xl float-slow opacity-20">💕</div>
             <div class="absolute bottom-40 left-10 text-purple-500 text-6xl float-medium opacity-20">💜</div>
 
@@ -717,7 +826,7 @@
         <div class="section-divider"></div>
 
         <!-- Event Details -->
-        <section class="py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+        <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-16">
                     <span class="section-badge">Save The Date</span>
@@ -804,8 +913,8 @@
 
         <div class="section-divider"></div>
 
-        <!-- Gallery Section -->
-        <section class="py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+        <!-- Gallery Section - Auto height untuk konten panjang -->
+        <section class="snap-section-auto py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <span class="section-badge">Galeri</span>
@@ -820,8 +929,8 @@
 
         <div class="section-divider"></div>
 
-        <!-- RSVP Section -->
-        <section class="py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+        <!-- RSVP Section - Auto height untuk konten panjang -->
+        <section class="snap-section-auto py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10">
                 <div class="max-w-3xl mx-auto">
                     <div class="text-center mb-12">
@@ -903,7 +1012,7 @@
         <div class="section-divider"></div>
 
         <!-- Gift Section -->
-        <section class="py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+        <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 text-center">
                 <span class="section-badge">Wedding Gift</span>
                 <h2 class="section-title text-gradient-2 mb-4">Kirim Hadiah</h2>
@@ -950,7 +1059,7 @@
         <div class="section-divider"></div>
 
         <!-- Footer -->
-        <footer class="py-16 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+        <footer class="snap-section py-16 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10 text-center">
                 <div class="inline-block p-4 rounded-full glass-pink mb-6">
                     <span class="text-5xl">💕</span>
@@ -1188,8 +1297,23 @@
             
             setTimeout(() => {
                 mainContent.classList.remove('hidden');
-                initScrollAnimations();
+                // Re-initialize scroll snap setelah content muncul
+                initScrollSnap();
             }, 600);
+        }
+
+        // Scroll Snap Handler
+        function initScrollSnap() {
+            const container = document.querySelector('.snap-container');
+            if (!container) return;
+
+            // Update scroll progress
+            container.addEventListener('scroll', () => {
+                const scrolled = container.scrollTop;
+                const maxScroll = container.scrollHeight - container.clientHeight;
+                const progress = (scrolled / maxScroll) * 100;
+                document.getElementById('scrollProgress').style.width = progress + '%';
+            });
         }
 
         function updateCountdown() {
@@ -1212,13 +1336,6 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (scrolled / maxScroll) * 100;
-            document.getElementById('scrollProgress').style.width = progress + '%';
-        });
-
         function initScrollAnimations() {
             if (typeof gsap === 'undefined') return;
             
@@ -1233,7 +1350,8 @@
                     scrollTrigger: {
                         trigger: elem,
                         start: 'top 85%',
-                        toggleActions: 'play none none reverse'
+                        toggleActions: 'play none none reverse',
+                        scroller: '.snap-container' // Gunakan snap-container sebagai scroller
                     }
                 });
             });
