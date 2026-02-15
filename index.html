@@ -116,11 +116,13 @@
             document.getElementById('groomFather').textContent = CONFIG.groom.father;
             document.getElementById('groomMother').textContent = CONFIG.groom.mother;
             
+            // Akad Info
             document.getElementById('akadDate').textContent = CONFIG.event.dateFull;
             document.getElementById('akadTime').textContent = CONFIG.event.timeAkad;
             document.getElementById('akadVenue').textContent = CONFIG.venue.akad.name;
             document.getElementById('akadAddress').textContent = CONFIG.venue.akad.address;
             
+            // Resepsi Info
             document.getElementById('resepsiDate').textContent = CONFIG.event.dateFull;
             document.getElementById('resepsiTime').textContent = CONFIG.event.timeResepsi;
             document.getElementById('resepsiVenue').textContent = CONFIG.venue.resepsi.name;
@@ -147,16 +149,12 @@
             document.getElementById('footerDate').textContent = CONFIG.event.date;
             document.getElementById('footerCouple').textContent = `${CONFIG.bride.shortName} & ${CONFIG.groom.shortName}`;
             
-            const galleryContainer = document.getElementById('galleryContainer');
-            galleryContainer.innerHTML = CONFIG.gallery.map((img, index) => `
-                <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''}" onclick="openLightbox(${index})">
-                    <img src="${img}" 
-                         class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ${index === 0 ? '' : 'aspect-square'}" 
-                         alt="Gallery ${index + 1}"
-                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect fill=%22%23${['ff006e','8338ec','3a86ff','fb5607'][index%4]}%22 width=%22400%22 height=%22400%22/><text fill=%22white%22 font-family=%22serif%22 font-size=%2280%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>📷 ${index+1}</text></svg>'; this.onerror=null;">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-            `).join('');
+            // Gallery Cover - Hanya 1 foto sampul
+            const galleryCover = document.getElementById('galleryCover');
+            galleryCover.src = CONFIG.gallery[0]; // Gunakan foto pertama sebagai sampul
+            galleryCover.onerror = function() {
+                this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect fill="%230f0c29" width="800" height="600"/><rect fill="%23ff006e" x="200" y="150" width="400" height="300" rx="20"/><text fill="white" font-family="serif" font-size="60" x="50%" y="50%" text-anchor="middle" dy=".3em">📷 Galeri</text></svg>';
+            };
         }
     </script>
 
@@ -184,15 +182,6 @@
             color: #ffffff;
             overflow-x: hidden;
             min-height: 100vh;
-            /* Scroll Snap untuk Desktop */
-            scroll-snap-type: y mandatory;
-        }
-        
-        /* Mobile: Scroll snap dengan proximity untuk pengalaman lebih natural */
-        @media (max-width: 768px) {
-            body {
-                scroll-snap-type: y proximity;
-            }
         }
         
         .font-couple {
@@ -394,8 +383,6 @@
             border-radius: 4px;
         }
         
-        .gallery-item { aspect-ratio: 1; }
-        
         .heart-beat { animation: heartBeat 1.5s ease-in-out infinite; }
         
         @keyframes heartBeat {
@@ -507,7 +494,6 @@
            SCROLL SNAP IMPLEMENTATION
            ============================================ */
         
-        /* Snap Container - Main Content */
         .snap-container {
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
@@ -515,16 +501,13 @@
             scroll-behavior: smooth;
         }
 
-        /* Mobile: Gunakan proximity untuk pengalaman scroll lebih natural */
         @media (max-width: 768px) {
             .snap-container {
                 scroll-snap-type: y proximity;
-                /* Fallback untuk browser lama */
                 -webkit-scroll-snap-type: y proximity;
             }
         }
 
-        /* Desktop: Mandatory untuk snap yang pasti */
         @media (min-width: 769px) {
             .snap-container {
                 scroll-snap-type: y mandatory;
@@ -532,7 +515,6 @@
             }
         }
 
-        /* Setiap Section adalah Snap Point */
         .snap-section {
             scroll-snap-align: start;
             scroll-snap-stop: always;
@@ -544,7 +526,6 @@
             justify-content: center;
         }
 
-        /* Section khusus yang kontennya panjang (RSVP, Gallery) */
         .snap-section-auto {
             scroll-snap-align: start;
             scroll-snap-stop: normal;
@@ -558,37 +539,26 @@
             padding: 4rem 0;
         }
 
-        /* Mobile adjustments untuk snap */
         @media (max-width: 768px) {
             .snap-section {
                 min-height: 100vh;
-                min-height: 100dvh; /* Dynamic viewport height untuk mobile */
+                min-height: 100dvh;
                 scroll-snap-align: start;
                 scroll-snap-stop: always;
             }
             
             .snap-section-auto {
                 min-height: auto;
-                scroll-snap-align: none; /* Nonaktifkan snap untuk section panjang di mobile */
+                scroll-snap-align: none;
             }
         }
 
-        /* Tablet */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .snap-section {
-                min-height: 100vh;
-                scroll-snap-align: start;
-            }
-        }
-
-        /* Touch action untuk performa scroll better di mobile */
         .snap-section,
         .snap-section-auto {
             touch-action: pan-y;
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Reduced motion untuk accessibility */
         @media (prefers-reduced-motion: reduce) {
             .snap-container {
                 scroll-snap-type: none;
@@ -597,6 +567,224 @@
             .snap-section-auto {
                 scroll-snap-align: none;
             }
+        }
+
+        /* Gallery Cover Styles */
+        .gallery-cover-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-cover-container:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-cover-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-cover-container:hover::before {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+        }
+
+        .gallery-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .gallery-cover-container:hover .gallery-cover-img {
+            transform: scale(1.1);
+        }
+
+        .gallery-cover-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .gallery-cover-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-cover-container:hover .gallery-cover-icon {
+            background: rgba(255, 0, 110, 0.3);
+            border-color: rgba(255, 0, 110, 0.6);
+            transform: scale(1.1);
+        }
+
+        /* Lightbox Styles */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-overlay.active .lightbox-image {
+            transform: scale(1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 10;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 0, 110, 0.3);
+            border-color: rgba(255, 0, 110, 0.6);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 10;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 0, 110, 0.3);
+            border-color: rgba(255, 0, 110, 0.6);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Swipe hint animation */
+        .swipe-hint {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            animation: swipeHint 2s ease-in-out infinite;
+        }
+
+        @keyframes swipeHint {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) translateX(0); }
+            50% { opacity: 1; transform: translateX(-50%) translateX(10px); }
         }
     </style>
 </head>
@@ -699,7 +887,7 @@
                 </h1>
 
                 <div class="mt-12 glass-color rounded-3xl p-8 md:p-12 inline-block max-w-2xl">
-                    <p class="text-3xl md:text-4xl font-serif text-white mb-4" id="heroDate">12 Februari 2028</p>
+                    <p class="text-3xl md:text-4xl font-serif text-white mb-4" id="heroDate">30 Mei 2028</p>
                     <div class="flex items-center justify-center gap-4 text-white mb-4">
                         <div class="h-px w-16 bg-gradient-to-r from-transparent to-pink-500"></div>
                         <span class="text-pink-400">♥</span>
@@ -911,87 +1099,66 @@
 
         <div class="section-divider"></div>
 
-        <!-- Event Details -->
+        <!-- AKAD NIKAH SECTION - Halaman Sendiri -->
         <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10">
-                <div class="text-center mb-16">
+                <div class="text-center mb-12">
                     <span class="section-badge">Save The Date</span>
-                    <h2 class="section-title text-gradient-1">Waktu & Tempat</h2>
+                    <h2 class="section-title text-gradient-1">Akad Nikah</h2>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <!-- Akad -->
-                    <div class="glass-pink rounded-3xl p-8 card-glow border-pink-500/20">
-                        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg">
-                            <span class="text-3xl">🕌</span>
-                        </div>
+                <div class="max-w-2xl mx-auto">
+                    <div class="glass-pink rounded-3xl p-8 md:p-12 card-glow border-pink-500/20 relative overflow-hidden">
+                        <!-- Decorative elements -->
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-500/20 to-transparent rounded-bl-full"></div>
+                        <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-rose-500/20 to-transparent rounded-tr-full"></div>
                         
-                        <h3 class="font-serif text-2xl mb-2 text-gradient-1">Akad Nikah</h3>
-                        <div class="w-12 h-1 bg-gradient-to-r from-pink-500 to-rose-500 mb-6 rounded-full"></div>
-                        
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-3">
-                                <div class="w-10 h-10 rounded-xl glass-pink flex items-center justify-center flex-shrink-0">
-                                    <span class="text-xl">📅</span>
-                                </div>
-                                <div>
-                                    <p id="akadDate" class="text-pink-300 font-semibold">Sabtu, 12 Februari 2028</p>
-                                    <p id="akadTime" class="text-white text-sm">08:00 - 10:00 WIB</p>
-                                </div>
+                        <div class="relative z-10">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                                <span class="text-4xl">🕌</span>
                             </div>
                             
-                            <div class="flex items-start gap-3">
-                                <div class="w-10 h-10 rounded-xl glass-pink flex items-center justify-center flex-shrink-0">
-                                    <span class="text-xl">📍</span>
-                                </div>
-                                <div>
-                                    <p id="akadVenue" class="text-pink-300 font-semibold">Masjid Raya Sinuruik</p>
-                                    <p id="akadAddress" class="text-white text-xs">Sinuruik, Kec. Talamau, Kab. Pasaman Barat, Sumatera Barat 26561</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button onclick="openMap('akad')" class="mt-6 w-full py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-pink-500/30 transition-all flex items-center justify-center gap-2 text-sm">
-                            <span>🗺️</span>
-                            Lihat Lokasi Akad
-                        </button>
-                    </div>
-
-                    <!-- Resepsi -->
-                    <div class="glass-blue rounded-3xl p-8 card-glow border-blue-500/20">
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg">
-                            <span class="text-3xl">🎉</span>
-                        </div>
-                        
-                        <h3 class="font-serif text-2xl mb-2 text-gradient-3">Resepsi</h3>
-                        <div class="w-12 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mb-6 rounded-full"></div>
-                        
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-3">
-                                <div class="w-10 h-10 rounded-xl glass-blue flex items-center justify-center flex-shrink-0">
-                                    <span class="text-xl">📅</span>
-                                </div>
-                                <div>
-                                    <p id="resepsiDate" class="text-blue-300 font-semibold">Sabtu, 12 Februari 2028</p>
-                                    <p id="resepsiTime" class="text-white text-sm">11:00 - 14:00 WIB</p>
-                                </div>
-                            </div>
+                            <h3 class="font-serif text-3xl md:text-4xl mb-2 text-gradient-1 text-center">Akad Nikah</h3>
+                            <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-rose-500 mx-auto mb-8 rounded-full"></div>
                             
-                            <div class="flex items-start gap-3">
-                                <div class="w-10 h-10 rounded-xl glass-blue flex items-center justify-center flex-shrink-0">
-                                    <span class="text-xl">📍</span>
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-4 p-4 glass-color rounded-2xl">
+                                    <div class="w-12 h-12 rounded-xl glass-pink flex items-center justify-center flex-shrink-0">
+                                        <span class="text-2xl">📅</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-pink-300 font-semibold text-lg">Hari & Tanggal</p>
+                                        <p id="akadDate" class="text-white text-xl">Selasa, 30 Mei 2028</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p id="resepsiVenue" class="text-blue-300 font-semibold">Rumah Ibu Maiyus Farida</p>
-                                    <p id="resepsiAddress" class="text-white text-xs">Kp. Marapak Jorong Benteng Nagari Sinuruik, Kec. Talamau, Kab. Pasaman Barat, Sumatera Barat</p>
+                                
+                                <div class="flex items-center gap-4 p-4 glass-color rounded-2xl">
+                                    <div class="w-12 h-12 rounded-xl glass-pink flex items-center justify-center flex-shrink-0">
+                                        <span class="text-2xl">⏰</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-pink-300 font-semibold text-lg">Waktu</p>
+                                        <p id="akadTime" class="text-white text-xl">08:00 - 10:00 WIB</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-4 p-4 glass-color rounded-2xl">
+                                    <div class="w-12 h-12 rounded-xl glass-pink flex items-center justify-center flex-shrink-0">
+                                        <span class="text-2xl">📍</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-pink-300 font-semibold text-lg">Tempat</p>
+                                        <p id="akadVenue" class="text-white text-xl mb-1">Masjid Raya Sinuruik</p>
+                                        <p id="akadAddress" class="text-white/70 text-sm leading-relaxed">Sinuruik, Kec. Talamau, Kabupaten Pasaman Barat, Sumatera Barat 26561</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <button onclick="openMap('resepsi')" class="mt-6 w-full py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2 text-sm">
-                            <span>🗺️</span>
-                            Lihat Lokasi Resepsi
-                        </button>
+                            <button onclick="openMap('akad')" class="mt-8 w-full py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-pink-500/30 transition-all flex items-center justify-center gap-2 text-lg">
+                                <span>🗺️</span>
+                                Lihat Lokasi Akad
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -999,16 +1166,92 @@
 
         <div class="section-divider"></div>
 
-        <!-- Gallery Section - Auto height untuk konten panjang -->
-        <section class="snap-section-auto py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <span class="section-badge">Galeri</span>
-                    <h2 class="section-title text-gradient-2">Momen Bahagia</h2>
+        <!-- RESEPSI SECTION - Halaman Sendiri -->
+        <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-12">
+                    <span class="section-badge">Save The Date</span>
+                    <h2 class="section-title text-gradient-3">Resepsi Pernikahan</h2>
                 </div>
 
-                <div id="galleryContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto auto-rows-[200px]">
-                    <!-- Filled by JavaScript -->
+                <div class="max-w-2xl mx-auto">
+                    <div class="glass-blue rounded-3xl p-8 md:p-12 card-glow border-blue-500/20 relative overflow-hidden">
+                        <!-- Decorative elements -->
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-bl-full"></div>
+                        <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-cyan-500/20 to-transparent rounded-tr-full"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                                <span class="text-4xl">🎉</span>
+                            </div>
+                            
+                            <h3 class="font-serif text-3xl md:text-4xl mb-2 text-gradient-3 text-center">Resepsi</h3>
+                            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mb-8 rounded-full"></div>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-4 p-4 glass-color rounded-2xl">
+                                    <div class="w-12 h-12 rounded-xl glass-blue flex items-center justify-center flex-shrink-0">
+                                        <span class="text-2xl">📅</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-blue-300 font-semibold text-lg">Hari & Tanggal</p>
+                                        <p id="resepsiDate" class="text-white text-xl">Selasa, 30 Mei 2028</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center gap-4 p-4 glass-color rounded-2xl">
+                                    <div class="w-12 h-12 rounded-xl glass-blue flex items-center justify-center flex-shrink-0">
+                                        <span class="text-2xl">⏰</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-blue-300 font-semibold text-lg">Waktu</p>
+                                        <p id="resepsiTime" class="text-white text-xl">11:00 - 14:00 WIB</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-4 p-4 glass-color rounded-2xl">
+                                    <div class="w-12 h-12 rounded-xl glass-blue flex items-center justify-center flex-shrink-0">
+                                        <span class="text-2xl">📍</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-blue-300 font-semibold text-lg">Tempat</p>
+                                        <p id="resepsiVenue" class="text-white text-xl mb-1">Kediaman Mempelai Wanita</p>
+                                        <p id="resepsiAddress" class="text-white/70 text-sm leading-relaxed">Kp. Marapak Jorong Benteng Nagari Sinuruik, Kec. Talamau, Kab. Pasaman Barat, Sumatera Barat</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button onclick="openMap('resepsi')" class="mt-8 w-full py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2 text-lg">
+                                <span>🗺️</span>
+                                Lihat Lokasi Resepsi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- GALLERY SECTION - Sampul 1 Foto Full Page -->
+        <section class="snap-section relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 z-10"></div>
+            </div>
+
+            <!-- Gallery Cover - 1 Foto Full Page -->
+            <div class="gallery-cover-container" onclick="openGalleryLightbox()">
+                <img id="galleryCover" src="" alt="Galeri Reren & Yadi" class="gallery-cover-img">
+                <div class="gallery-cover-overlay">
+                    <div class="gallery-cover-icon">
+                        <span>📷</span>
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-6xl text-white mb-2">Galeri</h2>
+                    <p class="text-white/80 text-lg mb-4">Momen Bahagia Kami</p>
+                    <p class="text-white/60 text-sm flex items-center gap-2">
+                        <span>Ketuk untuk melihat</span>
+                        <span class="animate-bounce">👆</span>
+                    </p>
                 </div>
             </div>
         </section>
@@ -1082,7 +1325,7 @@
                                         <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white font-serif text-sm">K</div>
                                         <div>
                                             <p class="font-semibold text-pink-300 text-sm">Keluarga Besar</p>
-                                            <p class="text-xs text-white/70">2 jam yang lalu</p>
+                                            p class="text-xs text-white/70">2 jam yang lalu</p>
                                         </div>
                                     </div>
                                     <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">Hadir</span>
@@ -1152,7 +1395,7 @@
                 </div>
                 
                 <h3 id="footerNames" class="font-couple text-5xl md:text-7xl mb-2 text-gradient-1">Reren & Yadi</h3>
-                <p id="footerDate" class="text-pink-400/60 text-lg mb-6">12 Februari 2028</p>
+                <p id="footerDate" class="text-pink-400/60 text-lg mb-6">30 Mei 2028</p>
                 
                 <div class="w-24 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 mx-auto rounded-full mb-6"></div>
                 
@@ -1162,12 +1405,23 @@
         </footer>
     </main>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 hidden items-center justify-center p-4 backdrop-blur-sm">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-4xl">✕</button>
-        <button onclick="changeImage(-1)" class="absolute left-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">‹</button>
-        <img id="lightboxImg" src="" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl transform scale-95 transition-transform duration-300 border-4 border-pink-500/30" alt="Gallery">
-        <button onclick="changeImage(1)" class="absolute right-6 text-white/80 hover:text-pink-500 transition-colors z-10 text-5xl hover:scale-110 transform">›</button>
+    <!-- Gallery Lightbox - Full Screen dengan Navigasi -->
+    <div id="galleryLightbox" class="lightbox-overlay">
+        <button class="lightbox-close" onclick="closeGalleryLightbox()">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="changeGalleryImage(-1)">‹</button>
+        <button class="lightbox-nav lightbox-next" onclick="changeGalleryImage(1)">›</button>
+        
+        <div class="lightbox-content">
+            <img id="lightboxGalleryImg" src="" alt="Gallery" class="lightbox-image">
+        </div>
+        
+        <div class="lightbox-counter">
+            <span id="galleryCounter">1</span> / <span id="galleryTotal">8</span>
+        </div>
+        
+        <div class="swipe-hint md:hidden">
+            <span>← Geser untuk navigasi →</span>
+        </div>
     </div>
 
     <!-- Map Modal -->
@@ -1199,7 +1453,6 @@
     <script>
         // Inisialisasi segera
         (function() {
-            // Fill content segera
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', initApp);
             } else {
@@ -1212,18 +1465,13 @@
                 fillContent();
                 initParticles();
                 
-                // Setup audio tanpa autoplay
                 const audio = document.getElementById('bgMusic');
                 if (audio) {
                     audio.volume = CONFIG.music.volume;
-                    // Preload metadata saja, tidak auto play
                     audio.preload = 'metadata';
                 }
                 
-                // Hide loader setelah minimal 1 detik
                 setTimeout(hideLoader, 1000);
-                
-                // Fallback: force hide loader setelah 5 detik
                 setTimeout(hideLoader, 5000);
             } catch (e) {
                 console.error('Init error:', e);
@@ -1254,7 +1502,6 @@
             if (hasMusicStarted) return;
             hasMusicStarted = true;
 
-            // Coba play musik
             const playPromise = audio.play();
             
             if (playPromise !== undefined) {
@@ -1264,7 +1511,6 @@
                     document.getElementById('musicToggle').classList.add('playing');
                     document.getElementById('musicToggle').classList.add('visible');
                 }).catch(error => {
-                    // Autoplay blocked, tampilkan tombol musik saja
                     console.log('Autoplay blocked:', error);
                     document.getElementById('musicToggle').classList.add('visible');
                 });
@@ -1383,17 +1629,14 @@
             
             setTimeout(() => {
                 mainContent.classList.remove('hidden');
-                // Re-initialize scroll snap setelah content muncul
                 initScrollSnap();
             }, 600);
         }
 
-        // Scroll Snap Handler
         function initScrollSnap() {
             const container = document.querySelector('.snap-container');
             if (!container) return;
 
-            // Update scroll progress
             container.addEventListener('scroll', () => {
                 const scrolled = container.scrollTop;
                 const maxScroll = container.scrollHeight - container.clientHeight;
@@ -1422,54 +1665,105 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        function initScrollAnimations() {
-            if (typeof gsap === 'undefined') return;
+        // Gallery Lightbox Functions
+        let currentGalleryIndex = 0;
+        let galleryLightboxOpen = false;
+
+        function openGalleryLightbox() {
+            const lightbox = document.getElementById('galleryLightbox');
+            const img = document.getElementById('lightboxGalleryImg');
+            const counter = document.getElementById('galleryCounter');
+            const total = document.getElementById('galleryTotal');
             
-            gsap.registerPlugin(ScrollTrigger);
-
-            gsap.utils.toArray('.card-glow').forEach(elem => {
-                gsap.from(elem, {
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse',
-                        scroller: '.snap-container' // Gunakan snap-container sebagai scroller
-                    }
-                });
-            });
-        }
-
-        let currentImageIndex = 0;
-
-        function openLightbox(index) {
-            currentImageIndex = index;
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightboxImg');
-            img.src = CONFIG.gallery[index];
-            lightbox.classList.remove('hidden');
-            lightbox.classList.add('flex');
-            setTimeout(() => img.classList.remove('scale-95'), 10);
+            currentGalleryIndex = 0;
+            img.src = CONFIG.gallery[currentGalleryIndex];
+            counter.textContent = currentGalleryIndex + 1;
+            total.textContent = CONFIG.gallery.length;
+            
+            lightbox.classList.add('active');
+            galleryLightboxOpen = true;
             document.body.style.overflow = 'hidden';
+            
+            // Add keyboard event listener
+            document.addEventListener('keydown', handleGalleryKeydown);
+            // Add touch events for swipe
+            addSwipeListeners();
         }
 
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightboxImg');
-            img.classList.add('scale-95');
-            setTimeout(() => {
-                lightbox.classList.add('hidden');
-                lightbox.classList.remove('flex');
-            }, 300);
+        function closeGalleryLightbox() {
+            const lightbox = document.getElementById('galleryLightbox');
+            lightbox.classList.remove('active');
+            galleryLightboxOpen = false;
             document.body.style.overflow = 'auto';
+            document.removeEventListener('keydown', handleGalleryKeydown);
+            removeSwipeListeners();
         }
 
-        function changeImage(direction) {
-            currentImageIndex = (currentImageIndex + direction + CONFIG.gallery.length) % CONFIG.gallery.length;
-            document.getElementById('lightboxImg').src = CONFIG.gallery[currentImageIndex];
+        function changeGalleryImage(direction) {
+            currentGalleryIndex = (currentGalleryIndex + direction + CONFIG.gallery.length) % CONFIG.gallery.length;
+            const img = document.getElementById('lightboxGalleryImg');
+            const counter = document.getElementById('galleryCounter');
+            
+            // Fade effect
+            img.style.opacity = '0.5';
+            img.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                img.src = CONFIG.gallery[currentGalleryIndex];
+                img.onload = () => {
+                    img.style.opacity = '1';
+                    img.style.transform = 'scale(1)';
+                };
+                counter.textContent = currentGalleryIndex + 1;
+            }, 200);
+        }
+
+        function handleGalleryKeydown(e) {
+            if (!galleryLightboxOpen) return;
+            
+            if (e.key === 'Escape') closeGalleryLightbox();
+            if (e.key === 'ArrowLeft') changeGalleryImage(-1);
+            if (e.key === 'ArrowRight') changeGalleryImage(1);
+        }
+
+        // Touch/Swipe handling
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function addSwipeListeners() {
+            const lightbox = document.getElementById('galleryLightbox');
+            lightbox.addEventListener('touchstart', handleTouchStart, { passive: true });
+            lightbox.addEventListener('touchend', handleTouchEnd, { passive: true });
+        }
+
+        function removeSwipeListeners() {
+            const lightbox = document.getElementById('galleryLightbox');
+            lightbox.removeEventListener('touchstart', handleTouchStart);
+            lightbox.removeEventListener('touchend', handleTouchEnd);
+        }
+
+        function handleTouchStart(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }
+
+        function handleTouchEnd(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next image
+                    changeGalleryImage(1);
+                } else {
+                    // Swipe right - previous image
+                    changeGalleryImage(-1);
+                }
+            }
         }
 
         function openMap(type) {
@@ -1551,14 +1845,10 @@
             });
         });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeLightbox();
-                closeMap();
-            }
-            if (!document.getElementById('lightbox').classList.contains('hidden')) {
-                if (e.key === 'ArrowLeft') changeImage(-1);
-                if (e.key === 'ArrowRight') changeImage(1);
+        // Close lightbox when clicking outside image
+        document.getElementById('galleryLightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeGalleryLightbox();
             }
         });
     </script>
