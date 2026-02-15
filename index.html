@@ -15,7 +15,7 @@
             bride: {
                 name: "Reni Pionika",
                 shortName: "Reren",
-                childOrder: "Putri kedua",
+                childOrder: "Putri kedua dari",
                 father: "Alm. Amir Hamzah",
                 mother: "Maiyus Farida",
                 photo: "bride.jpg",
@@ -24,7 +24,7 @@
             groom: {
                 name: "Yadi Hartono",
                 shortName: "Yadi",
-                childOrder: "Putra pertama",
+                childOrder: "Putra pertama dari",
                 father: "Alm. Tarlan Manaf",
                 mother: "Almh. Jumiatie",
                 photo: "groom.jpg",
@@ -45,7 +45,7 @@
                     mapsEmbed: "https://www.google.com/maps/embed/v1/search?q=6XR8%2B3PX%20Sinuruik%2C%20Kabupaten%20Pasaman%20Barat%2C%20Sumatera%20Barat&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&maptype=satellite"
                 },
                 resepsi: {
-                    name: "Kediaman Mempelai Wanita",
+                    name: "Rumah Mempelai",
                     address: "Kp. Marapak Jorong Benteng Nagari Sinuruik, Kec. Talamau, Kab. Pasaman Barat, Sumatera Barat",
                     mapsQuery: "Rumah+Maiyus+Farida+Sinuruik+Pasaman+Barat",
                     mapsEmbed: "https://www.google.com/maps/embed/v1/search?q=6XR8%2B4GR%2C%20Sinuruik%2C%20Kec.%20Talamau%2C%20Kabupaten%20Pasaman%20Barat%2C%20Sumatera%20Barat&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&maptype=satellite"
@@ -105,6 +105,15 @@
             groomPhoto.onerror = function() {
                 this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect fill="%233a86ff" width="400" height="400"/><text fill="white" font-family="serif" font-size="120" x="50%" y="50%" text-anchor="middle" dy=".3em">🤵</text></svg>';
             };
+            
+            // Couple photo
+            const couplePhoto = document.getElementById('couplePhoto');
+            if (couplePhoto) {
+                couplePhoto.src = 'couple.jpg';
+                couplePhoto.onerror = function() {
+                    this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500"><rect fill="%23ff006e" width="400" height="500"/><text fill="white" font-family="serif" font-size="100" x="50%" y="50%" text-anchor="middle" dy=".3em">💑</text></svg>';
+                };
+            }
             
             document.getElementById('brideName').textContent = CONFIG.bride.name;
             document.getElementById('brideOrder').textContent = CONFIG.bride.childOrder;
@@ -768,25 +777,6 @@
             }
         }
 
-        /* Swipe hint animation */
-        .swipe-hint {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.8rem;
-            animation: swipeHint 2s ease-in-out infinite;
-        }
-
-        @keyframes swipeHint {
-            0%, 100% { opacity: 0.5; transform: translateX(-50%) translateX(0); }
-            50% { opacity: 1; transform: translateX(-50%) translateX(10px); }
-        }
-
         /* RSVP Messages Container Scrollbar */
         #messagesContainer::-webkit-scrollbar {
             width: 6px;
@@ -798,6 +788,13 @@
         #messagesContainer::-webkit-scrollbar-thumb {
             background: rgba(255, 0, 110, 0.3);
             border-radius: 3px;
+        }
+
+        /* Scrollable messages box */
+        .messages-scroll-box {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 8px;
         }
     </style>
 </head>
@@ -869,7 +866,7 @@
     <!-- Main Content dengan Scroll Snap -->
     <main id="main-content" class="hidden snap-container">
         
-        <!-- Hero Section -->
+        <!-- Hero Section - TANPA SCROLL HINT -->
         <section class="snap-section relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="blob blob-1"></div>
             <div class="blob blob-2"></div>
@@ -909,12 +906,7 @@
                     <p class="tracking-[0.3em] text-sm text-white uppercase">Akad & Resepsi</p>
                 </div>
 
-                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-70 animate-bounce">
-                    <span class="text-xs tracking-widest text-white">SCROLL</span>
-                    <div class="w-6 h-10 border-2 border-pink-500 rounded-full flex justify-center pt-2">
-                        <div class="w-1 h-2 bg-pink-500 rounded-full animate-bounce"></div>
-                    </div>
-                </div>
+                <!-- SCROLL HINT DIHILANGKAN -->
             </div>
         </section>
 
@@ -955,7 +947,7 @@
      COUPLE SECTION - MODIFIED STRUCTURE
      ============================================ -->
 
-<!-- Section 1: Couple Names + New Photo -->
+<!-- Section 1: Couple Names + New Photo - TANPA SCROLL HINT -->
 <section class="snap-section relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
     <div class="absolute top-20 right-10 text-pink-500 text-8xl float-slow opacity-20">💕</div>
     <div class="absolute bottom-40 left-10 text-purple-500 text-6xl float-medium opacity-20">💜</div>
@@ -971,7 +963,7 @@
             <div class="relative group">
                 <div class="absolute -inset-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-full opacity-30 group-hover:opacity-50 transition-all duration-700 blur-2xl"></div>
                 <div class="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10">
-                    <img src="couple.jpg" alt="Reren & Yadi" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    <img id="couplePhoto" src="couple.jpg" alt="Reren & Yadi" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22500%22><rect fill=%22%23ff006e%22 width=%22400%22 height=%22500%22/><text fill=%22white%22 font-family=%22serif%22 font-size=%22100%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>💑</text></svg>'">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     <div class="absolute bottom-6 left-0 right-0 text-center">
@@ -982,19 +974,13 @@
             </div>
         </div>
 
-        <!-- Navigation hint -->
-        <div class="text-center opacity-60 animate-bounce">
-            <span class="text-xs tracking-widest text-white">GULIR KE BAWAH</span>
-            <div class="w-6 h-10 border-2 border-pink-500 rounded-full flex justify-center pt-2 mx-auto mt-2">
-                <div class="w-1 h-2 bg-pink-500 rounded-full animate-bounce"></div>
-            </div>
-        </div>
+        <!-- SCROLL HINT DIHILANGKAN -->
     </div>
 </section>
 
 <div class="section-divider"></div>
 
-<!-- Section 2: Bride Details (Reni Pionika - Halaman Sendiri) -->
+<!-- Section 2: Bride Details (Reni Pionika - Halaman Sendiri) - TANPA NICKNAME -->
 <section class="snap-section relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
     <div class="absolute top-32 left-10 text-pink-500 text-6xl float-slow opacity-30">💖</div>
     <div class="absolute bottom-20 right-20 text-rose-500 text-5xl float-medium opacity-30">🌸</div>
@@ -1019,11 +1005,11 @@
             </div>
         </div>
 
-        <!-- Bride Name & Details -->
+        <!-- Bride Name & Details - TANPA NICKNAME -->
         <div class="text-center max-w-lg mx-auto">
             <h3 id="brideName" class="font-couple text-5xl md:text-6xl text-white mb-3">Reni Pionika</h3>
-            <p class="text-pink-400 text-lg mb-2 italic">"Reren"</p>
-            <p id="brideOrder" class="text-white/80 mb-6 text-lg">Putri kedua</p>
+            <!-- NICKNAME DIHILANGKAN -->
+            <p id="brideOrder" class="text-white/80 mb-6 text-lg">Putri kedua dari</p>
             
             <div class="glass-pink rounded-3xl p-6 inline-block max-w-sm border border-pink-500/30">
                 <div class="flex items-center justify-center gap-2 mb-4">
@@ -1032,7 +1018,7 @@
                     <div class="h-px w-12 bg-gradient-to-l from-transparent to-pink-500"></div>
                 </div>
                 <p class="text-white leading-relaxed">
-                    Putri dari<br>
+                    <!-- "Putri dari" DIHILANGKAN -->
                     <span class="text-white font-semibold text-lg block mt-1" id="brideFather">Almarhum Amir Hamzah</span>
                     <span class="text-pink-400">&</span><br>
                     <span class="text-white font-semibold text-lg" id="brideMother">Maiyus Farida</span>
@@ -1044,7 +1030,7 @@
 
 <div class="section-divider"></div>
 
-<!-- Section 3: Groom Details (Yadi Hartono - Halaman Sendiri) -->
+<!-- Section 3: Groom Details (Yadi Hartono - Halaman Sendiri) - TANPA NICKNAME -->
 <section class="snap-section relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
     <div class="absolute top-20 right-10 text-blue-500 text-6xl float-slow opacity-30">💙</div>
     <div class="absolute bottom-32 left-20 text-cyan-500 text-5xl float-medium opacity-30">🤵</div>
@@ -1069,11 +1055,11 @@
             </div>
         </div>
 
-        <!-- Groom Name & Details -->
+        <!-- Groom Name & Details - TANPA NICKNAME -->
         <div class="text-center max-w-lg mx-auto">
             <h3 id="groomName" class="font-couple text-5xl md:text-6xl text-white mb-3">Yadi Hartono</h3>
-            <p class="text-blue-400 text-lg mb-2 italic">"Yadi"</p>
-            <p id="groomOrder" class="text-white/80 mb-6 text-lg">Putra pertama</p>
+            <!-- NICKNAME DIHILANGKAN -->
+            <p id="groomOrder" class="text-white/80 mb-6 text-lg">Putra pertama dari</p>
             
             <div class="glass-blue rounded-3xl p-6 inline-block max-w-sm border border-blue-500/30">
                 <div class="flex items-center justify-center gap-2 mb-4">
@@ -1082,7 +1068,7 @@
                     <div class="h-px w-12 bg-gradient-to-l from-transparent to-blue-500"></div>
                 </div>
                 <p class="text-white leading-relaxed">
-                    Putra dari<br>
+                    <!-- "Putra dari" DIHILANGKAN -->
                     <span class="text-white font-semibold text-lg block mt-1" id="groomFather">Almarhum Tarlan Manaf</span>
                     <span class="text-blue-400">&</span><br>
                     <span class="text-white font-semibold text-lg" id="groomMother">Almh. Jumiatie</span>
@@ -1094,17 +1080,19 @@
 
 <div class="section-divider"></div>
 
-<!-- Section 4: Quote (Dipisahkan dari section mempelai) -->
+<!-- Section 4: Quote - FONT BIASA YANG LEBIH BESAR -->
 <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
     <div class="container mx-auto px-6 relative z-10">
         <div class="text-center max-w-3xl mx-auto">
             <div class="relative p-10 glass-color rounded-3xl border border-pink-500/20">
                 <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-serif shadow-lg">"</div>
-                <p class="font-couple text-2xl md:text-3xl text-white leading-relaxed mb-6 mt-4">
-                    Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya
+                <!-- FONT BIASA (Pompiere) YANG LEBIH BESAR -->
+                <p class="text-xl md:text-2xl text-white leading-relaxed mb-6 mt-4" style="font-family: 'Pompiere', sans-serif; font-size: 1.5rem; line-height: 1.8;">
+                    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya"
                 </p>
                 <div class="w-20 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mb-3"></div>
-                <p class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 font-semibold tracking-widest text-sm">QS. Ar-Rum: 21</p>
+                <!-- QS. Ar-Rum:21 DENGAN FONT BIASA -->
+                <p class="text-white font-semibold tracking-widest text-base" style="font-family: 'Pompiere', sans-serif;">QS. Ar-Rum: 21</p>
             </div>
         </div>
     </div>
@@ -1112,12 +1100,12 @@
 
         <div class="section-divider"></div>
 
-        <!-- AKAD NIKAH SECTION - Halaman Sendiri -->
+        <!-- AKAD NIKAH SECTION - TANPA JUDUL "AKAD NIKAH" DI ATAS -->
         <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-12">
                     <span class="section-badge">Save The Date</span>
-                    <h2 class="section-title text-gradient-1">Akad Nikah</h2>
+                    <!-- JUDUL "AKAD NIKAH" DI ATAS DIHILANGKAN -->
                 </div>
 
                 <div class="max-w-2xl mx-auto">
@@ -1131,6 +1119,7 @@
                                 <span class="text-4xl">🕌</span>
                             </div>
                             
+                            <!-- JUDUL "AKAD NIKAH" HANYA DI SINI -->
                             <h3 class="font-serif text-3xl md:text-4xl mb-2 text-gradient-1 text-center">Akad Nikah</h3>
                             <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-rose-500 mx-auto mb-8 rounded-full"></div>
                             
@@ -1179,12 +1168,12 @@
 
         <div class="section-divider"></div>
 
-        <!-- RESEPSI SECTION - Halaman Sendiri -->
+        <!-- RESEPSI SECTION - TANPA JUDUL "RESEPSI PERNIKAHAN" DI ATAS -->
         <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-12">
                     <span class="section-badge">Save The Date</span>
-                    <h2 class="section-title text-gradient-3">Resepsi Pernikahan</h2>
+                    <!-- JUDUL "RESEPSI PERNIKAHAN" DI ATAS DIHILANGKAN -->
                 </div>
 
                 <div class="max-w-2xl mx-auto">
@@ -1198,7 +1187,8 @@
                                 <span class="text-4xl">🎉</span>
                             </div>
                             
-                            <h3 class="font-serif text-3xl md:text-4xl mb-2 text-gradient-3 text-center">Resepsi</h3>
+                            <!-- JUDUL DIUBAH MENJADI "RESEPSI PERNIKAHAN" -->
+                            <h3 class="font-serif text-3xl md:text-4xl mb-2 text-gradient-3 text-center">Resepsi Pernikahan</h3>
                             <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mb-8 rounded-full"></div>
                             
                             <div class="space-y-6">
@@ -1228,7 +1218,8 @@
                                     </div>
                                     <div>
                                         <p class="text-blue-300 font-semibold text-lg">Tempat</p>
-                                        <p id="resepsiVenue" class="text-white text-xl mb-1">Kediaman Mempelai Wanita</p>
+                                        <!-- DIUBAH MENJADI "RUMAH MEMPELAI" -->
+                                        <p id="resepsiVenue" class="text-white text-xl mb-1">Rumah Mempelai</p>
                                         <p id="resepsiAddress" class="text-white/70 text-sm leading-relaxed">Kp. Marapak Jorong Benteng Nagari Sinuruik, Kec. Talamau, Kab. Pasaman Barat, Sumatera Barat</p>
                                     </div>
                                 </div>
@@ -1271,13 +1262,14 @@
 
         <div class="section-divider"></div>
 
-        <!-- RSVP INPUT SECTION - Halaman Input Data Terpisah -->
+        <!-- RSVP INPUT SECTION - FONT BIASA UNTUK "KONFIRMASI KEHADIRAN" -->
         <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10">
                 <div class="max-w-2xl mx-auto">
                     <div class="text-center mb-12">
                         <span class="section-badge">RSVP</span>
-                        <h2 class="section-title text-gradient-1">Konfirmasi Kehadiran</h2>
+                        <!-- FONT BIASA (BUKAN Love Light) -->
+                        <h2 class="text-4xl md:text-5xl font-bold text-gradient-1 mb-4" style="font-family: 'Pompiere', sans-serif;">Konfirmasi Kehadiran</h2>
                         <p class="text-white max-w-lg mx-auto text-sm mt-4">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu</p>
                     </div>
 
@@ -1335,7 +1327,7 @@
 
         <div class="section-divider"></div>
 
-        <!-- RSVP RESULTS SECTION - Halaman Hasil Data Tamu Terpisah -->
+        <!-- RSVP RESULTS SECTION - DENGAN SCROLL BOX -->
         <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 relative z-10">
                 <div class="max-w-2xl mx-auto">
@@ -1345,50 +1337,53 @@
                         <p class="text-white max-w-lg mx-auto text-sm mt-4">Terima kasih atas konfirmasi dan doa restunya</p>
                     </div>
 
-                    <div class="space-y-4 max-h-[600px] overflow-y-auto pr-2" id="messagesContainer">
-                        <!-- Sample Message 1 -->
-                        <div class="glass-pink rounded-2xl p-5 border border-pink-500/20">
-                            <div class="flex justify-between items-start mb-2">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white font-serif text-sm">K</div>
-                                    <div>
-                                        <p class="font-semibold text-pink-300 text-sm">Keluarga Besar</p>
-                                        <p class="text-xs text-white/70">2 jam yang lalu</p>
+                    <!-- BOX SCROLL UNTUK KOMENTAR -->
+                    <div class="glass-color rounded-3xl p-6 border border-pink-500/20">
+                        <div class="messages-scroll-box space-y-4" id="messagesContainer">
+                            <!-- Sample Message 1 -->
+                            <div class="glass-pink rounded-2xl p-5 border border-pink-500/20">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white font-serif text-sm">K</div>
+                                        <div>
+                                            <p class="font-semibold text-pink-300 text-sm">Keluarga Besar</p>
+                                            <p class="text-xs text-white/70">2 jam yang lalu</p>
+                                        </div>
                                     </div>
+                                    <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">Hadir</span>
                                 </div>
-                                <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">Hadir</span>
+                                <p class="text-white leading-relaxed text-sm">Selamat menempuh hidup baru Reren & Yadi! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. 🎉✨</p>
                             </div>
-                            <p class="text-white leading-relaxed text-sm">Selamat menempuh hidup baru Reren & Yadi! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. 🎉✨</p>
-                        </div>
 
-                        <!-- Sample Message 2 -->
-                        <div class="glass-color rounded-2xl p-5 border border-white/10">
-                            <div class="flex justify-between items-start mb-2">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-serif text-sm">A</div>
-                                    <div>
-                                        <p class="font-semibold text-blue-300 text-sm">Ahmad Rizky</p>
-                                        <p class="text-xs text-white/70">5 jam yang lalu</p>
+                            <!-- Sample Message 2 -->
+                            <div class="glass-color rounded-2xl p-5 border border-white/10">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-serif text-sm">A</div>
+                                        <div>
+                                            <p class="font-semibold text-blue-300 text-sm">Ahmad Rizky</p>
+                                            <p class="text-xs text-white/70">5 jam yang lalu</p>
+                                        </div>
                                     </div>
+                                    <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">Hadir</span>
                                 </div>
-                                <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">Hadir</span>
+                                <p class="text-white leading-relaxed text-sm">Barakallah, semoga lancar sampai hari H! Mohon maaf saya datang dengan 2 orang ya. 🙏</p>
                             </div>
-                            <p class="text-white leading-relaxed text-sm">Barakallah, semoga lancar sampai hari H! Mohon maaf saya datang dengan 2 orang ya. 🙏</p>
-                        </div>
 
-                        <!-- Sample Message 3 -->
-                        <div class="glass-color rounded-2xl p-5 border border-white/10">
-                            <div class="flex justify-between items-start mb-2">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-serif text-sm">S</div>
-                                    <div>
-                                        <p class="font-semibold text-purple-300 text-sm">Siti Aminah</p>
-                                        <p class="text-xs text-white/70">1 hari yang lalu</p>
+                            <!-- Sample Message 3 -->
+                            <div class="glass-color rounded-2xl p-5 border border-white/10">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-serif text-sm">S</div>
+                                        <div>
+                                            <p class="font-semibold text-purple-300 text-sm">Siti Aminah</p>
+                                            <p class="text-xs text-white/70">1 hari yang lalu</p>
+                                        </div>
                                     </div>
+                                    <span class="px-2 py-1 bg-white/20 text-white text-xs rounded-full">Berhalangan</span>
                                 </div>
-                                <span class="px-2 py-1 bg-white/20 text-white text-xs rounded-full">Berhalangan</span>
+                                <p class="text-white leading-relaxed text-sm">Maaf ya Reren & Yadi, saya tidak bisa hadir karena ada urusan di luar kota. Selamat berbahagia! 💕</p>
                             </div>
-                            <p class="text-white leading-relaxed text-sm">Maaf ya Reren & Yadi, saya tidak bisa hadir karena ada urusan di luar kota. Selamat berbahagia! 💕</p>
                         </div>
                     </div>
                 </div>
@@ -1397,11 +1392,12 @@
 
         <div class="section-divider"></div>
 
-        <!-- WEDDING GIFT - DANA SECTION - Halaman Terpisah -->
+        <!-- WEDDING GIFT - DANA SECTION - FONT BIASA -->
         <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 text-center">
                 <span class="section-badge">Wedding Gift</span>
-                <h2 class="section-title text-gradient-2 mb-4">Kirim Hadiah Digital</h2>
+                <!-- FONT BIASA (BUKAN Love Light) -->
+                <h2 class="text-4xl md:text-5xl font-bold text-gradient-2 mb-4" style="font-family: 'Pompiere', sans-serif;">Kirim Hadiah Digital</h2>
                 <p class="text-white mb-12 max-w-lg mx-auto text-sm">Bagi keluarga dan sahabat yang ingin mengirimkan hadiah melalui DANA</p>
 
                 <div class="max-w-md mx-auto">
@@ -1409,7 +1405,7 @@
                         <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-lg">
                             DANA
                         </div>
-                        <h3 class="font-serif text-2xl mb-2 text-white">DANA</h3>
+                        <h3 class="text-2xl mb-2 text-white font-semibold" style="font-family: 'Pompiere', sans-serif;">DANA</h3>
                         <div class="space-y-2 mb-6">
                             <p id="bankNumber" class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 tracking-wider">085763410286</p>
                             <p id="bankName" class="text-white/80 text-sm">E-Wallet</p>
@@ -1426,11 +1422,12 @@
 
         <div class="section-divider"></div>
 
-        <!-- WEDDING GIFT - KADO SECTION - Halaman Terpisah -->
+        <!-- WEDDING GIFT - KADO SECTION - FONT BIASA -->
         <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
             <div class="container mx-auto px-6 text-center">
                 <span class="section-badge">Wedding Gift</span>
-                <h2 class="section-title text-gradient-3 mb-4">Kirim Kado Fisik</h2>
+                <!-- FONT BIASA (BUKAN Love Light) -->
+                <h2 class="text-4xl md:text-5xl font-bold text-gradient-3 mb-4" style="font-family: 'Pompiere', sans-serif;">Kirim Hadiah Fisik</h2>
                 <p class="text-white mb-12 max-w-lg mx-auto text-sm">Alamat pengiriman kado untuk Reren & Yadi</p>
 
                 <div class="max-w-md mx-auto">
@@ -1438,7 +1435,7 @@
                         <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg">
                             📦
                         </div>
-                        <h3 class="font-serif text-2xl mb-4 text-white">Alamat Pengiriman</h3>
+                        <h3 class="text-2xl mb-4 text-white font-semibold" style="font-family: 'Pompiere', sans-serif;">Alamat Pengiriman</h3>
                         <div class="text-left glass-color rounded-xl p-5 mb-6 border border-white/10">
                             <p id="giftAddress" class="text-white leading-relaxed text-sm">
                                 <!-- Filled by JS -->
@@ -1485,10 +1482,6 @@
         
         <div class="lightbox-counter">
             <span id="galleryCounter">1</span> / <span id="galleryTotal">8</span>
-        </div>
-        
-        <div class="swipe-hint md:hidden">
-            <span>← Geser untuk navigasi →</span>
         </div>
     </div>
 
