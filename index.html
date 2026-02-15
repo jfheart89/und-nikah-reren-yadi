@@ -750,78 +750,164 @@
 
         <div class="section-divider"></div>
 
-        <!-- Couple Section -->
-        <section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
-            <div class="absolute top-20 right-10 text-pink-500 text-8xl float-slow opacity-20">💕</div>
-            <div class="absolute bottom-40 left-10 text-purple-500 text-6xl float-medium opacity-20">💜</div>
+<!-- ============================================
+     COUPLE SECTION - MODIFIED STRUCTURE
+     ============================================ -->
 
-            <div class="container mx-auto px-6 relative z-10">
-                <div class="text-center mb-16">
-                    <span class="section-badge">Mempelai</span>
-                    <h2 class="section-title text-gradient-2">Reren & Yadi</h2>
-                </div>
+<!-- Section 1: Couple Names + New Photo -->
+<section class="snap-section relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+    <div class="absolute top-20 right-10 text-pink-500 text-8xl float-slow opacity-20">💕</div>
+    <div class="absolute bottom-40 left-10 text-purple-500 text-6xl float-medium opacity-20">💜</div>
 
-                <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto items-center">
-                    <!-- Bride -->
-                    <div class="text-center group">
-                        <div class="relative inline-block mb-6">
-                            <div class="absolute -inset-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full opacity-20 group-hover:opacity-40 transition-all duration-700 blur-2xl"></div>
-                            <div class="relative w-64 h-64 mx-auto">
-                                <div class="absolute inset-0 border-2 border-pink-500/30 rounded-full rotate-6 group-hover:rotate-12 transition-transform duration-700"></div>
-                                <img id="bridePhoto" src="bride.jpg" alt="Reren" class="relative w-full h-full rounded-full object-cover shadow-2xl border-4 border-pink-500/20">
-                                <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-xl shadow-lg">
-                                    👰
-                                </div>
-                            </div>
-                        </div>
-                        <h3 id="brideName" class="font-couple text-4xl text-white mb-2">Reni Pionika</h3>
-                        <p id="brideOrder" class="text-pink-400 mb-4 text-lg">Putri kedua</p>
-                        <div class="glass-pink rounded-2xl p-6 inline-block max-w-sm">
-                            <p class="text-white leading-relaxed text-sm">
-                                Putri dari<br>
-                                <span class="text-white font-semibold" id="brideFather">Almarhum Amir Hamzah</span><br>
-                                & <span class="text-white font-semibold" id="brideMother">Maiyus Farida</span>
-                            </p>
-                        </div>
-                    </div>
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-12">
+            <span class="section-badge">Mempelai</span>
+            <h2 class="section-title text-gradient-2">Reren & Yadi</h2>
+        </div>
 
-                    <!-- Groom -->
-                    <div class="text-center group">
-                        <div class="relative inline-block mb-6">
-                            <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full opacity-20 group-hover:opacity-40 transition-all duration-700 blur-2xl"></div>
-                            <div class="relative w-64 h-64 mx-auto">
-                                <div class="absolute inset-0 border-2 border-blue-500/30 rounded-full -rotate-6 group-hover:-rotate-12 transition-transform duration-700"></div>
-                                <img id="groomPhoto" src="groom.jpg" alt="Yadi" class="relative w-full h-full rounded-full object-cover shadow-2xl border-4 border-blue-500/20">
-                                <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-xl shadow-lg">
-                                    🤵
-                                </div>
-                            </div>
-                        </div>
-                        <h3 id="groomName" class="font-couple text-4xl text-white mb-2">Yadi Hartono</h3>
-                        <p id="groomOrder" class="text-blue-400 mb-4 text-lg">Putra pertama</p>
-                        <div class="glass-blue rounded-2xl p-6 inline-block max-w-sm">
-                            <p class="text-white leading-relaxed text-sm">
-                                Putra dari<br>
-                                <span class="text-white font-semibold" id="groomFather">Almarhum Tarlan Manaf</span><br>
-                                & <span class="text-white font-semibold" id="groomMother">Jumiatie</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quote -->
-                <div class="mt-16 text-center max-w-2xl mx-auto">
-                    <div class="relative p-8 glass-color rounded-3xl border border-pink-500/20">
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white text-xl font-serif shadow-lg">"</div>
-                        <p class="font-couple text-xl text-white leading-relaxed mb-4">
-                            Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya
-                        </p>
-                        <div class="w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mb-2"></div>
-                        <p class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 font-semibold tracking-widest text-xs">QS. Ar-Rum: 21</p>
+        <!-- NEW: Couple Photo (Tambahan 1 foto di bawah nama) -->
+        <div class="max-w-md mx-auto mb-8">
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-full opacity-30 group-hover:opacity-50 transition-all duration-700 blur-2xl"></div>
+                <div class="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10">
+                    <img src="couple.jpg" alt="Reren & Yadi" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22500%22><rect fill=%22%23ff006e%22 width=%22400%22 height=%22500%22/><text fill=%22white%22 font-family=%22serif%22 font-size=%22100%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>💑</text></svg>'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-0 right-0 text-center">
+                        <p class="font-couple text-3xl text-white">Reren & Yadi</p>
+                        <p class="text-white/80 text-sm mt-1">30 Mei 2028</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Navigation hint -->
+        <div class="text-center opacity-60 animate-bounce">
+            <span class="text-xs tracking-widest text-white">GULIR KE BAWAH</span>
+            <div class="w-6 h-10 border-2 border-pink-500 rounded-full flex justify-center pt-2 mx-auto mt-2">
+                <div class="w-1 h-2 bg-pink-500 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Section 2: Bride Details (Reni Pionika - Halaman Sendiri) -->
+<section class="snap-section relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+    <div class="absolute top-32 left-10 text-pink-500 text-6xl float-slow opacity-30">💖</div>
+    <div class="absolute bottom-20 right-20 text-rose-500 text-5xl float-medium opacity-30">🌸</div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-8">
+            <span class="section-badge">Mempelai Wanita</span>
+        </div>
+
+        <!-- Bride Photo - Full Page -->
+        <div class="max-w-sm mx-auto mb-8">
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full opacity-20 group-hover:opacity-40 transition-all duration-700 blur-2xl"></div>
+                <div class="relative w-72 h-72 mx-auto">
+                    <div class="absolute inset-0 border-2 border-pink-500/30 rounded-full rotate-6 group-hover:rotate-12 transition-transform duration-700"></div>
+                    <div class="absolute -inset-2 border border-pink-500/20 rounded-full -rotate-3 group-hover:-rotate-6 transition-transform duration-700"></div>
+                    <img id="bridePhoto" src="bride.jpg" alt="Reren" class="relative w-full h-full rounded-full object-cover shadow-2xl border-4 border-pink-500/20">
+                    <div class="absolute -bottom-2 -right-2 w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-2xl shadow-lg animate-pulse">
+                        👰
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bride Name & Details -->
+        <div class="text-center max-w-lg mx-auto">
+            <h3 id="brideName" class="font-couple text-5xl md:text-6xl text-white mb-3">Reni Pionika</h3>
+            <p class="text-pink-400 text-lg mb-2 italic">"Reren"</p>
+            <p id="brideOrder" class="text-white/80 mb-6 text-lg">Putri kedua</p>
+            
+            <div class="glass-pink rounded-3xl p-6 inline-block max-w-sm border border-pink-500/30">
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <div class="h-px w-12 bg-gradient-to-r from-transparent to-pink-500"></div>
+                    <span class="text-pink-400 text-2xl">❦</span>
+                    <div class="h-px w-12 bg-gradient-to-l from-transparent to-pink-500"></div>
+                </div>
+                <p class="text-white leading-relaxed">
+                    Putri dari<br>
+                    <span class="text-white font-semibold text-lg block mt-1" id="brideFather">Almarhum Amir Hamzah</span>
+                    <span class="text-pink-400">&</span><br>
+                    <span class="text-white font-semibold text-lg" id="brideMother">Maiyus Farida</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Section 3: Groom Details (Yadi Hartono - Halaman Sendiri) -->
+<section class="snap-section relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+    <div class="absolute top-20 right-10 text-blue-500 text-6xl float-slow opacity-30">💙</div>
+    <div class="absolute bottom-32 left-20 text-cyan-500 text-5xl float-medium opacity-30">🤵</div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-8">
+            <span class="section-badge">Mempelai Pria</span>
+        </div>
+
+        <!-- Groom Photo - Full Page -->
+        <div class="max-w-sm mx-auto mb-8">
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full opacity-20 group-hover:opacity-40 transition-all duration-700 blur-2xl"></div>
+                <div class="relative w-72 h-72 mx-auto">
+                    <div class="absolute inset-0 border-2 border-blue-500/30 rounded-full -rotate-6 group-hover:-rotate-12 transition-transform duration-700"></div>
+                    <div class="absolute -inset-2 border border-blue-500/20 rounded-full rotate-3 group-hover:rotate-6 transition-transform duration-700"></div>
+                    <img id="groomPhoto" src="groom.jpg" alt="Yadi" class="relative w-full h-full rounded-full object-cover shadow-2xl border-4 border-blue-500/20">
+                    <div class="absolute -bottom-2 -right-2 w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-2xl shadow-lg animate-pulse">
+                        🤵
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Groom Name & Details -->
+        <div class="text-center max-w-lg mx-auto">
+            <h3 id="groomName" class="font-couple text-5xl md:text-6xl text-white mb-3">Yadi Hartono</h3>
+            <p class="text-blue-400 text-lg mb-2 italic">"Yadi"</p>
+            <p id="groomOrder" class="text-white/80 mb-6 text-lg">Putra pertama</p>
+            
+            <div class="glass-blue rounded-3xl p-6 inline-block max-w-sm border border-blue-500/30">
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <div class="h-px w-12 bg-gradient-to-r from-transparent to-blue-500"></div>
+                    <span class="text-blue-400 text-2xl">❦</span>
+                    <div class="h-px w-12 bg-gradient-to-l from-transparent to-blue-500"></div>
+                </div>
+                <p class="text-white leading-relaxed">
+                    Putra dari<br>
+                    <span class="text-white font-semibold text-lg block mt-1" id="groomFather">Almarhum Tarlan Manaf</span>
+                    <span class="text-blue-400">&</span><br>
+                    <span class="text-white font-semibold text-lg" id="groomMother">Almh. Jumiatie</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Section 4: Quote (Dipisahkan dari section mempelai) -->
+<section class="snap-section py-24 relative overflow-hidden" style="background: linear-gradient(180deg, #0f0c29 0%, #000000 100%);">
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <div class="relative p-10 glass-color rounded-3xl border border-pink-500/20">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-serif shadow-lg">"</div>
+                <p class="font-couple text-2xl md:text-3xl text-white leading-relaxed mb-6 mt-4">
+                    Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya
+                </p>
+                <div class="w-20 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mb-3"></div>
+                <p class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 font-semibold tracking-widest text-sm">QS. Ar-Rum: 21</p>
+            </div>
+        </div>
+    </div>
+</section>
 
         <div class="section-divider"></div>
 
